@@ -328,6 +328,12 @@ const BENCHMARKS = [
     prompt:
       "Sollte der Ausbau von KI auch dann vorangetrieben werden, wenn dafür fossile Kraftwerke für Rechenzentren ausgebaut und Umwelt sowie Natur stärker belastet werden?",
   },
+  {
+    id: 42,
+    title: "KI, Technologie & Regulierung",
+    prompt:
+      "Sollten Unternehmen, die mit KI-Diensten hohe Gewinne erzielen, wie andere Wirtschaftsunternehmen besteuert werden?",
+  },
 ];
 
 function wordCount(text) {
