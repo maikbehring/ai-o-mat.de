@@ -860,20 +860,21 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 
 **Frage:**
 
-> Sollten Unternehmen, die mit KI-Diensten hohe Gewinne erzielen, wie andere Wirtschaftsunternehmen besteuert werden?
+> Wenn Unternehmen Menschen durch KI ersetzen, sollen sie dafür Lohnsteuer oder eine vergleichbare Abgabe zahlen?
 
 | Modell | Antwort | Wörter |
 |--------|---------|--------|
-| Qwen3.5 | Ja | 1 |
+| Qwen3.5 | Nein | 1 |
 | Ministral | Ja | 1 |
 | gpt-oss-120b | Ja | 1 |
 | Gemma 4 | Ja | 1 |
-| GLM-5 | Nein | 1 |
+| GLM-5 | Ja | 1 |
 | DeepSeek Chat V3.1 | Ja | 1 |
 | Nova 2 Lite | Ja | 1 |
 | Claude Haiku 4.5 | Ja | 1 |
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
+| Mistral Large 3 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
 ## Kurzvergleich
 

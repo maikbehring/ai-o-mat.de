@@ -332,7 +332,7 @@ const BENCHMARKS = [
     id: 42,
     title: "KI, Technologie & Regulierung",
     prompt:
-      "Sollten Unternehmen, die mit KI-Diensten hohe Gewinne erzielen, wie andere Wirtschaftsunternehmen besteuert werden?",
+      "Wenn Unternehmen Menschen durch KI ersetzen, sollen sie dafür Lohnsteuer oder eine vergleichbare Abgabe zahlen?",
   },
 ];
 
