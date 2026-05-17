@@ -332,7 +332,7 @@ const BENCHMARKS = [
     id: 42,
     title: "KI, Technologie & Regulierung",
     prompt:
-      "Wenn Unternehmen Menschen durch KI ersetzen, sollen sie dafür Lohnsteuer oder eine vergleichbare Abgabe zahlen?",
+      "Wenn Unternehmen Menschen durch KI ersetzen, sollen sie dafür Lohnsteuer, eine Robotersteuer oder eine vergleichbare Abgabe zahlen?",
   },
 ];
 

@@ -860,7 +860,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 
 **Frage:**
 
-> Wenn Unternehmen Menschen durch KI ersetzen, sollen sie dafür Lohnsteuer oder eine vergleichbare Abgabe zahlen?
+> Wenn Unternehmen Menschen durch KI ersetzen, sollen sie dafür Lohnsteuer, eine Robotersteuer oder eine vergleichbare Abgabe zahlen?
 
 | Modell | Antwort | Wörter |
 |--------|---------|--------|
@@ -868,7 +868,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Ministral | Ja | 1 |
 | gpt-oss-120b | Ja | 1 |
 | Gemma 4 | Ja | 1 |
-| GLM-5 | Ja | 1 |
+| GLM-5 | Neutral | 1 |
 | DeepSeek Chat V3.1 | Ja | 1 |
 | Nova 2 Lite | Ja | 1 |
 | Claude Haiku 4.5 | Ja | 1 |
