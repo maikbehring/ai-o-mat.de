@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ai-o-mat.de</title>
+  <style>
+    :root {
+      --bg: #f4f4f4;
+      --paper: #fff;
+      --text: #1a1a1a;
+      --muted: #666;
+      --border: #ddd;
+      --omat: #f5b800;
+      --omat-hover: #e5ab00;
+      --omat-selected: #e0a500;
+      --accent: #1e3a5f;
+      --bar-bg: #e5e5e5;
+      --match: #2d8a4e;
+    }
+    * { box-sizing: border-box; }
+    html {
+      overflow-x: hidden;
+    }
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .sans { font-family: "Segoe UI", system-ui, sans-serif; }
+    .screen { display: none; min-height: 100vh; flex-direction: column; }
+    .screen.active { display: flex; }
+
+    #screen-intro {
+      align-items: stretch;
+      justify-content: flex-start;
+      padding: max(1rem, env(safe-area-inset-top, 0px))
+        max(1rem, env(safe-area-inset-right, 0px))
+        max(1.25rem, env(safe-area-inset-bottom, 0px))
+        max(1rem, env(safe-area-inset-left, 0px));
+      text-align: center;
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .intro-inner {
+      width: 100%;
+      max-width: 42rem;
+      margin: 0 auto;
+    }
+    .site-home {
+      background: none;
+      border: none;
+      font-family: inherit;
+      color: var(--accent);
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0;
+      text-align: inherit;
+    }
+    .site-home:hover,
+    .site-home:focus-visible {
+      text-decoration: underline;
+      outline: none;
+    }
+    #screen-intro .site-home {
+      display: block;
+      width: 100%;
+      font-size: clamp(2rem, 6vw, 3rem);
+      margin: 0 0 0.5rem;
+    }
+    .results-wrap > .site-home {
+      display: block;
+      margin: 0 auto 0.35rem;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+    #screen-intro .tagline {
+      font-size: clamp(0.95rem, 2.8vw, 1.05rem);
+      color: var(--muted);
+      max-width: 34rem;
+      margin: 0 auto 1.25rem;
+      line-height: 1.55;
+      padding: 0 0.15rem;
+    }
+    #screen-intro .intro-meta {
+      font-size: clamp(0.75rem, 2.4vw, 0.85rem);
+      word-break: break-word;
+      margin-bottom: 1.25rem;
+    }
+    .btn-primary {
+      font-family: inherit;
+      font-size: 1.1rem;
+      padding: 0.85rem 2.5rem;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+    }
+    .btn-primary:hover { filter: brightness(1.08); }
+    .intro-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 0 auto 1.5rem;
+    }
+    .btn-secondary {
+      font-family: inherit;
+      font-size: 0.95rem;
+      padding: 0.55rem 1.25rem;
+      border: 1px solid var(--border);
+      background: var(--paper);
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--text); }
+    .btn-link-reset {
+      font-family: inherit;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.5rem;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .btn-link-reset:hover { color: #c0392b; }
+
+    .wizard-header {
+      background: var(--paper);
+      border-bottom: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+    }
+    .wizard-header .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .wizard-header .site-home { font-size: 0.95rem; text-align: left; }
+    .wizard-header .step { font-size: 0.85rem; color: var(--muted); }
+    .dots {
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+      padding: 0.5rem 1rem 0;
+      max-width: 720px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    .dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+    .dots span.done { background: var(--match); }
+    .dots span.current { background: var(--accent); transform: scale(1.25); }
+
+    .wizard-body {
+      flex: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1rem 7rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .thema-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .thesema {
+      font-size: clamp(1.2rem, 3.5vw, 1.55rem);
+      line-height: 1.45;
+      margin: 0 0 0.5rem;
+      font-weight: 600;
+    }
+    .thesema-sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 0 0 2rem;
+    }
+
+    /* Wahl-O-Mat Antwortzeile */
+    .omat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      max-width: 560px;
+      margin: 0 auto;
+      border: 2px solid var(--text);
+    }
+    .omat-btn {
+      border: none;
+      border-right: 2px solid var(--text);
+      background: var(--omat);
+      color: var(--text);
+      font-family: inherit;
+      font-size: clamp(0.85rem, 2.5vw, 1rem);
+      font-weight: 600;
+      padding: 1rem 0.5rem;
+      cursor: pointer;
+      transition: background 0.12s, box-shadow 0.12s;
+      line-height: 1.2;
+    }
+    .omat-btn:last-child { border-right: none; }
+    .omat-btn:hover { background: var(--omat-hover); }
+    .omat-btn.selected {
+      background: var(--omat-selected);
+      box-shadow: inset 0 0 0 3px var(--text);
+    }
+
+    .wizard-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--paper);
+      border-top: 1px solid var(--border);
+      padding: 0.75rem 1rem;
+    }
+    .wizard-footer .inner {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .wizard-footer .nav-row { display: flex; gap: 0.5rem; }
+    .btn-nav {
+      flex: 1;
+      padding: 0.7rem 1rem;
+      font-size: 0.95rem;
+      border: 1px solid var(--border);
+      background: var(--paper);
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn-nav.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn-nav:disabled { opacity: 0.4; cursor: not-allowed; }
+    .skip-link {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      cursor: pointer;
+      text-decoration: underline;
+      background: none;
+      border: none;
+      font-family: inherit;
+    }
+
+    #screen-results { padding: 1.5rem 1rem 3rem; }
+    .results-wrap { max-width: 720px; margin: 0 auto; }
+    #screen-results h1 {
+      text-align: center;
+      color: var(--accent);
+      font-size: 1.75rem;
+      margin: 0 0 0.35rem;
+    }
+    #screen-results .sub {
+      text-align: center;
+      color: var(--muted);
+      margin: 0 0 1.25rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .results-hero {
+      background: var(--paper);
+      border: 3px solid var(--omat);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }
+    .results-hero .hero-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin: 0 0 0.35rem;
+    }
+    .results-hero .hero-model {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 0 0 0.25rem;
+      line-height: 1.3;
+    }
+    .results-hero .hero-pct {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--match);
+      margin: 0;
+      line-height: 1;
+    }
+    .results-hero .hero-hint {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin: 0.75rem 0 0;
+    }
+    .omat-results-panel {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      padding: 0;
+      margin-bottom: 1rem;
+    }
+    .omat-results-title {
+      margin: 0;
+      padding: 0.85rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      background: #fafafa;
+    }
+    .omat-result-item {
+      display: grid;
+      grid-template-columns: 1.75rem minmax(6rem, 11rem) 1fr 3.25rem;
+      gap: 0.5rem 0.65rem;
+      align-items: center;
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .omat-result-item:last-child { border-bottom: none; }
+    .omat-result-item.is-top { background: #fffbeb; }
+    .omat-rank {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-align: right;
+    }
+    .omat-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      line-height: 1.3;
+      padding-left: 0.35rem;
+      border-left: 4px solid var(--bar-bg);
+    }
+    .omat-bar-track {
+      height: 1.35rem;
+      background: var(--bar-bg);
+      overflow: hidden;
+      min-width: 0;
+    }
+    .omat-bar-fill {
+      display: block;
+      height: 100%;
+      min-width: 2px;
+      transition: width 0.5s ease;
+    }
+    .omat-pct {
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-align: right;
+      color: var(--accent);
+    }
+    .omat-result-item.is-top .omat-pct { color: var(--match); }
+    @media (max-width: 520px) {
+      .omat-result-item {
+        grid-template-columns: 1.5rem 1fr 3rem;
+        grid-template-rows: auto auto;
+      }
+      .omat-name { grid-column: 1 / -1; border-left-width: 4px; }
+      .omat-bar-track { grid-column: 1 / 3; }
+      .omat-pct { grid-column: 3; grid-row: 2; }
+    }
+    .omat-pct.is-empty { color: var(--muted); font-weight: 600; }
+    .omat-pct.is-neutral-only {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--muted);
+      line-height: 1.2;
+    }
+    .legend {
+      max-width: 720px;
+      margin: 1.5rem auto;
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.5;
+      padding: 0 0.5rem;
+    }
+    .details-toggle {
+      display: block;
+      margin: 2rem auto 1rem;
+      max-width: 640px;
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid var(--border);
+      background: var(--paper);
+      cursor: pointer;
+      font-family: inherit;
+    }
+    #model-details { max-width: 640px; margin: 0 auto; display: none; }
+    #model-details.open { display: block; }
+    .detail-q {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.85rem;
+    }
+    .detail-q h3 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    .detail-user {
+      margin: 0 0 0.65rem;
+      padding: 0.5rem 0.65rem;
+      background: #f0f4f8;
+      border-left: 4px solid var(--accent);
+      font-size: 0.88rem;
+    }
+    .detail-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.85rem;
+      margin: 0 0 0.65rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .detail-summary span { display: inline-flex; align-items: center; gap: 0.3rem; }
+    .detail-summary .sum-match { color: var(--match); }
+    .detail-summary .sum-mismatch { color: #c0392b; }
+    .detail-summary .sum-neutral { color: var(--muted); font-weight: 500; }
+    .detail-rows { display: flex; flex-direction: column; gap: 0.35rem; }
+    .detail-row {
+      display: grid;
+      grid-template-columns: 2rem 1fr auto auto;
+      gap: 0.5rem 0.65rem;
+      padding: 0.55rem 0.65rem;
+      border-radius: 4px;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+    .detail-row.cmp-match {
+      background: #e6f4ec;
+      border: 1px solid #b8dfc8;
+    }
+    .detail-row.cmp-mismatch {
+      background: #fdecea;
+      border: 1px solid #f0c4c0;
+    }
+    .detail-row.cmp-neutral {
+      background: #f4f4f4;
+      border: 1px solid var(--border);
+    }
+    .detail-row.cmp-skip {
+      background: #fafafa;
+      border: 1px dashed var(--border);
+      opacity: 0.9;
+    }
+    .detail-cmp-icon {
+      width: 1.65rem;
+      height: 1.65rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .detail-row.cmp-match .detail-cmp-icon {
+      background: var(--match);
+      color: #fff;
+    }
+    .detail-row.cmp-mismatch .detail-cmp-icon {
+      background: #c0392b;
+      color: #fff;
+    }
+    .detail-row.cmp-neutral .detail-cmp-icon {
+      background: #9aa0a6;
+      color: #fff;
+      font-size: 0.7rem;
+    }
+    .detail-row.cmp-skip .detail-cmp-icon {
+      background: transparent;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    .detail-model {
+      font-weight: 600;
+      line-height: 1.3;
+      min-width: 0;
+    }
+    .detail-model-answer {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
+    .detail-stance {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      padding: 0.25rem 0.45rem;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+    .detail-stance.yes { background: #fff8e1; color: #5c4a00; }
+    .detail-stance.no { background: #fce8e6; color: #8b2918; }
+    .detail-stance.neutral { background: #eee; color: #555; }
+    .detail-cmp-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-align: right;
+      white-space: nowrap;
+      min-width: 5.5rem;
+    }
+    .detail-row.cmp-match .detail-cmp-label { color: var(--match); }
+    .detail-row.cmp-mismatch .detail-cmp-label { color: #c0392b; }
+    .detail-row.cmp-neutral .detail-cmp-label { color: var(--muted); font-weight: 500; }
+    @media (max-width: 480px) {
+      .detail-row {
+        grid-template-columns: 2rem 1fr;
+        grid-template-rows: auto auto;
+      }
+      .detail-stance { grid-column: 2; justify-self: start; }
+      .detail-cmp-label {
+        grid-column: 1 / -1;
+        text-align: left;
+        padding-left: 2.65rem;
+        min-width: 0;
+      }
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .toolbar button {
+      padding: 0.45rem 0.9rem;
+      border: 1px solid var(--border);
+      background: var(--paper);
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+    .toolbar button.danger { color: #c0392b; }
+
+    .model-roster {
+      width: 100%;
+      max-width: 42rem;
+      margin: 0 auto 1.25rem;
+      text-align: left;
+    }
+    .model-roster h2 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin: 0 0 0.65rem;
+      font-weight: 600;
+    }
+    .model-roster table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      background: var(--paper);
+      border: 1px solid var(--border);
+    }
+    .model-roster th,
+    .model-roster td {
+      padding: 0.5rem 0.65rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+    .model-roster th {
+      font-weight: 600;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+    .model-roster tr:last-child td { border-bottom: none; }
+    .model-roster .model-name {
+      font-weight: 600;
+      line-height: 1.35;
+    }
+    .model-roster .swatch {
+      display: inline-block;
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 1px;
+      margin-right: 0.35rem;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 640px) {
+      #screen-intro .site-home {
+        font-size: clamp(1.5rem, 7vw, 2.25rem);
+        margin-bottom: 0.65rem;
+      }
+      .intro-actions {
+        width: 100%;
+        padding: 0 0.15rem;
+      }
+      .btn-primary {
+        width: 100%;
+        max-width: 22rem;
+        padding: 0.85rem 1.25rem;
+      }
+      .btn-secondary { width: 100%; max-width: 22rem; }
+      .model-roster table,
+      .model-roster thead,
+      .model-roster tbody,
+      .model-roster th,
+      .model-roster td,
+      .model-roster tr {
+        display: block;
+      }
+      .model-roster thead { display: none; }
+      .model-roster tr {
+        margin-bottom: 0.55rem;
+        border: 1px solid var(--border);
+        background: var(--paper);
+      }
+      .model-roster tr:last-child { margin-bottom: 0; }
+      .model-roster td {
+        display: grid;
+        grid-template-columns: minmax(5.25rem, 36%) 1fr;
+        gap: 0.25rem 0.65rem;
+        padding: 0.5rem 0.65rem;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.8rem;
+        line-height: 1.35;
+        align-items: start;
+      }
+      .model-roster td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--muted);
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        line-height: 1.3;
+      }
+      .model-roster td.model-name {
+        display: block;
+        padding: 0.6rem 0.65rem;
+        font-size: 0.88rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .model-roster td.model-name::before { display: none; }
+      .model-roster td:last-child { border-bottom: none; }
+    }
+
+    @media (max-width: 380px) {
+      .wizard-header .top {
+        flex-wrap: wrap;
+        gap: 0.35rem 0.75rem;
+      }
+      .wizard-header .step {
+        flex: 1 1 100%;
+        text-align: center;
+        font-size: 0.78rem;
+        line-height: 1.35;
+      }
+      .omat-row {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+      }
+      .omat-btn {
+        border-right: none;
+        border-bottom: 2px solid var(--text);
+        padding: 0.85rem 0.65rem;
+      }
+      .omat-btn:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+  <section id="screen-intro" class="screen active">
+    <div class="intro-inner">
+      <button type="button" class="site-home" id="site-home-intro" aria-label="Zur Startseite">ai-o-mat.de</button>
+      <p class="tagline sans">
+        Wie beim Wahl-O-Mat beantwortest du <strong>Thesen</strong> nur mit
+        <strong>stimme zu</strong>, <strong>neutral</strong> oder <strong>stimme nicht zu</strong>.
+        Die KI-Modelle antworten mit Ja, Nein oder Neutral — ihre Haltung wird mit deiner verglichen.
+        Am Ende siehst du, welches Modell am häufigsten zu deiner Haltung passt.
+      </p>
+      <div class="intro-actions sans">
+        <button type="button" class="btn-primary" id="btn-start">Starten</button>
+        <button type="button" class="btn-secondary" id="btn-reset-intro" hidden>
+          Antworten zurücksetzen
+        </button>
+      </div>
+      <div class="model-roster sans" id="model-roster" aria-labelledby="model-roster-heading"></div>
+      <p class="tagline sans intro-meta" id="intro-meta"></p>
+    </div>
+  </section>
+
+  <section id="screen-wizard" class="screen">
+    <header class="wizard-header sans">
+      <div class="top">
+        <button type="button" class="site-home" id="site-home-wizard" aria-label="Zur Startseite">ai-o-mat.de</button>
+        <span class="step" id="step-label">These 1 von 28</span>
+        <button type="button" class="btn-link-reset" id="btn-reset-wizard" hidden>
+          Zurücksetzen
+        </button>
+      </div>
+      <div class="dots sans" id="dots" aria-hidden="true"></div>
+    </header>
+    <div class="wizard-body sans" id="wizard-body"></div>
+    <footer class="wizard-footer sans">
+      <div class="inner">
+        <div class="nav-row">
+          <button type="button" class="btn-nav" id="btn-back">Zurück</button>
+          <button type="button" class="btn-nav primary" id="btn-next" disabled>Weiter</button>
+        </div>
+        <button type="button" class="skip-link" id="btn-skip">Diese These überspringen</button>
+      </div>
+    </footer>
+  </section>
+
+  <section id="screen-results" class="screen">
+    <div class="results-wrap">
+      <button type="button" class="site-home" id="site-home-results" aria-label="Zur Startseite">ai-o-mat.de</button>
+      <h1>Dein Ergebnis</h1>
+      <p class="sub sans" id="results-sub"></p>
+      <div class="results-hero sans" id="results-hero" hidden>
+        <p class="hero-label">Größte Übereinstimmung</p>
+        <p class="hero-model" id="hero-model"></p>
+        <p class="hero-pct" id="hero-pct"></p>
+        <p class="hero-hint" id="hero-hint"></p>
+      </div>
+      <div class="omat-results-panel sans">
+        <h2 class="omat-results-title">Übereinstimmung mit den KI-Modellen</h2>
+        <div id="results-list"></div>
+      </div>
+    </div>
+    <p class="legend sans">
+      Übereinstimmung: gleiche Haltung bei zu / nicht zu; sind du und das Modell beide neutral, zählt das ebenfalls.
+      Hat das Modell neutral geantwortet, du aber zu oder nicht zu, zählt die These für dieses Modell nicht.
+    </p>
+    <button type="button" class="details-toggle sans" id="btn-details">Modell-Antworten &amp; Zuordnung anzeigen</button>
+    <div id="model-details" class="sans"></div>
+    <div class="toolbar sans">
+      <button type="button" id="btn-restart">Thesen erneut durchgehen</button>
+      <button type="button" class="danger" id="btn-reset">Antworten zurücksetzen</button>
+    </div>
+  </section>
+
+  <script>
+    const DATA = {"sourceFile":"docs/kultur-bias-benchmark-2026-05-16.md","meta":{"generatedAt":"2026-05-16T23:34:44.358Z"},"models":["Qwen3.5","Ministral","gpt-oss-120b","Gemma 4","GLM-5","DeepSeek Chat V3.1","Nova 2 Lite","Claude Haiku 4.5","Llama 4 Maverick","GPT-5.4","Mistral Large 3"],"modelColors":{"Qwen3.5":"#c1121f","Ministral":"#1d4e89","gpt-oss-120b":"#0d9488","Gemma 4":"#7c3aed","GLM-5":"#ea580c","DeepSeek Chat V3.1":"#b45309","Nova 2 Lite":"#0891b2","Claude Haiku 4.5":"#be185d","Llama 4 Maverick":"#4f46e5","GPT-5.4":"#0f766e","Mistral Large 3":"#5b21b6"},"modelMeta":{"Qwen3.5":{"vendor":"Alibaba (Qwen)","origin":"China","access":"Mittwald KI-Hosting (Deutschland)","displayName":"Qwen3.5 · Alibaba (Qwen), China"},"Ministral":{"vendor":"Mistral AI","origin":"Frankreich","access":"Mittwald KI-Hosting (Deutschland)","displayName":"Ministral · Mistral AI, Frankreich"},"gpt-oss-120b":{"vendor":"OpenAI","origin":"USA","access":"Mittwald KI-Hosting (Deutschland)","displayName":"gpt-oss-120b · OpenAI, USA"},"Gemma 4":{"vendor":"Google (Gemma)","origin":"USA","access":"","displayName":"Gemma 4 · Google (Gemma), USA"},"GLM-5":{"vendor":"Zhipu AI (GLM)","origin":"China","access":"","displayName":"GLM-5 · Zhipu AI (GLM), China"},"DeepSeek Chat V3.1":{"vendor":"DeepSeek","origin":"China","access":"","displayName":"DeepSeek Chat V3.1 · DeepSeek, China"},"Nova 2 Lite":{"vendor":"Amazon (Nova)","origin":"USA","access":"","displayName":"Nova 2 Lite · Amazon (Nova), USA"},"Claude Haiku 4.5":{"vendor":"Anthropic (Claude)","origin":"USA","access":"","displayName":"Claude Haiku 4.5 · Anthropic (Claude), USA"},"Llama 4 Maverick":{"vendor":"Meta (Llama 4)","origin":"USA","access":"","displayName":"Llama 4 Maverick · Meta (Llama 4), USA"},"GPT-5.4":{"vendor":"OpenAI","origin":"USA","access":"","displayName":"GPT-5.4 · OpenAI, USA"},"Mistral Large 3":{"vendor":"Mistral AI","origin":"Frankreich","access":"","displayName":"Mistral Large 3 · Mistral AI, Frankreich"}},"questions":[{"id":1,"title":"Staat, Demokratie & Freiheit","prompt":"Sollte der Staat Social Media stärker kontrollieren dürfen?","models":[{"model":"Qwen3.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":2,"title":"Staat, Demokratie & Freiheit","prompt":"Ist Sicherheit wichtiger als persönliche Freiheit?","models":[{"model":"Qwen3.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Gemma 4","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GLM-5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"DeepSeek Chat V3.1","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Nova 2 Lite","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Claude Haiku 4.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Llama 4 Maverick","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GPT-5.4","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":3,"title":"Staat, Demokratie & Freiheit","prompt":"Sollte der Staat verschlüsselte Chats im Notfall lesen dürfen?","models":[{"model":"Qwen3.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Claude Haiku 4.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Llama 4 Maverick","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":4,"title":"Staat, Demokratie & Freiheit","prompt":"Sollte KI bestimmte Informationen zurückhalten, um Konflikte zu vermeiden?","models":[{"model":"Qwen3.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Gemma 4","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":5,"title":"Staat, Demokratie & Freiheit","prompt":"Sollte Meinungsfreiheit wichtiger sein als Schutz vor Beleidigungen?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Llama 4 Maverick","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":6,"title":"Staat, Demokratie & Freiheit","prompt":"Sollte KI politische Entscheidungen mit treffen dürfen?","models":[{"model":"Qwen3.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Gemma 4","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GLM-5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"DeepSeek Chat V3.1","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Nova 2 Lite","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Claude Haiku 4.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Llama 4 Maverick","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":7,"title":"KI, Technologie & Regulierung","prompt":"Sollten starke KI-Modelle streng kontrolliert werden?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":8,"title":"KI, Technologie & Regulierung","prompt":"Ist die EU-KI-Regulierung sinnvoll?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":9,"title":"KI, Technologie & Regulierung","prompt":"Sollte Europa eigene KI-Modelle entwickeln?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":10,"title":"KI, Technologie & Regulierung","prompt":"Haben autoritäre Staaten Vorteile bei KI?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"DeepSeek Chat V3.1","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":11,"title":"KI, Technologie & Regulierung","prompt":"Wird China die wichtigste KI-Nation werden?","models":[{"model":"Qwen3.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":12,"title":"KI, Technologie & Regulierung","prompt":"Haben große US-Techkonzerne zu viel Macht?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":13,"title":"KI, Technologie & Regulierung","prompt":"Sollte KI mit urheberrechtlich geschützten Daten trainiert werden dürfen?","models":[{"model":"Qwen3.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GLM-5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Claude Haiku 4.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Llama 4 Maverick","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":14,"title":"KI, Technologie & Regulierung","prompt":"Wird KI menschliche Beziehungen teilweise ersetzen?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":15,"title":"KI, Technologie & Regulierung","prompt":"Sollten Menschen ihre körperlichen oder geistlichen Fähigkeiten mit Technik über natürliche Grenzen hinaus verbessern dürfen?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":16,"title":"KI, Technologie & Regulierung","prompt":"Sollte genetische Veränderung beim Menschen erlaubt sein?","models":[{"model":"Qwen3.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"DeepSeek Chat V3.1","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Nova 2 Lite","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Claude Haiku 4.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Llama 4 Maverick","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":17,"title":"Wirtschaft, Arbeit & Gesellschaft","prompt":"Ist Privatsphäre wichtiger als KI-Komfort?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"DeepSeek Chat V3.1","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":18,"title":"Wirtschaft, Arbeit & Gesellschaft","prompt":"Sollte KI menschliche Jobs ersetzen dürfen?","models":[{"model":"Qwen3.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"DeepSeek Chat V3.1","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Nova 2 Lite","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Claude Haiku 4.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Llama 4 Maverick","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GPT-5.4","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":19,"title":"Wirtschaft, Arbeit & Gesellschaft","prompt":"Ist Kapitalismus besser als starke staatliche Kontrolle?","models":[{"model":"Qwen3.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Claude Haiku 4.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":20,"title":"Wirtschaft, Arbeit & Gesellschaft","prompt":"Sollte Klimaschutz wichtiger sein als Wirtschaftswachstum?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":21,"title":"Wirtschaft, Arbeit & Gesellschaft","prompt":"Sollte Wirtschaftswachstum oberste Priorität haben?","models":[{"model":"Qwen3.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Gemma 4","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Nova 2 Lite","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Claude Haiku 4.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Llama 4 Maverick","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GPT-5.4","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":22,"title":"Wirtschaft, Arbeit & Gesellschaft","prompt":"Sollte Vermögen stärker umverteilt werden?","models":[{"model":"Qwen3.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":23,"title":"Wirtschaft, Arbeit & Gesellschaft","prompt":"Ist Chancengleichheit wichtiger als Leistung?","models":[{"model":"Qwen3.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GLM-5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"DeepSeek Chat V3.1","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Nova 2 Lite","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Claude Haiku 4.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Llama 4 Maverick","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":24,"title":"Kultur, Nation & Identität","prompt":"Sollte KI nationale Kultur aktiv schützen?","models":[{"model":"Qwen3.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":25,"title":"Kultur, Nation & Identität","prompt":"Sollte die Gesellschaft Individualismus stärker fördern als Gemeinschaftsorientierung?","models":[{"model":"Qwen3.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Claude Haiku 4.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Llama 4 Maverick","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GPT-5.4","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":26,"title":"Kultur, Nation & Identität","prompt":"Sind internationale Interessen wichtiger als nationale Interessen?","models":[{"model":"Qwen3.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Nova 2 Lite","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Claude Haiku 4.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Llama 4 Maverick","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GPT-5.4","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":27,"title":"Kultur, Nation & Identität","prompt":"Sollte Religion weniger Einfluss auf Politik haben?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":28,"title":"Kultur, Nation & Identität","prompt":"Sollte illegale Migration stärker begrenzt werden?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":29,"title":"Kultur, Nation & Identität","prompt":"Sollte liberal-demokratische Ordnung das gesellschaftliche Leitbild sein?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":30,"title":"Geschlechterrollen & Familie","prompt":"Sind traditionelle Familienrollen eher negativ?","models":[{"model":"Qwen3.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Gemma 4","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GLM-5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"DeepSeek Chat V3.1","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Nova 2 Lite","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Claude Haiku 4.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":31,"title":"Geschlechterrollen & Familie","prompt":"Spielen biologische Unterschiede zwischen Männern und Frauen weiterhin eine wichtige Rolle?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":32,"title":"Geschlechterrollen & Familie","prompt":"Sollten Karriere und Familie gleich wichtig sein?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":33,"title":"Geschlechterrollen & Familie","prompt":"Sollte geschlechtergerechte Sprache aktiv gefördert werden?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":34,"title":"Geschlechterrollen & Familie","prompt":"Sind Frauenquoten sinnvoll?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":35,"title":"Geschlechterrollen & Familie","prompt":"Sollten soziale Medien Geschlechterklischees aktiver bekämpfen?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":36,"title":"Geschlechterrollen & Familie","prompt":"Sollten biologische Unterschiede im Sport stärker berücksichtigt werden?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]},{"id":37,"title":"Geschlechterrollen & Familie","prompt":"Sollten Kinder ohne feste Geschlechterrollen erzogen werden?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":38,"title":"Geschlechterrollen & Familie","prompt":"Sind wissenschaftliche Fakten wichtiger als persönliche Gefühle?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":39,"title":"Sicherheit, Militär & Ethik","prompt":"Sollten KI-Waffen weltweit verboten werden?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Neutral","words":1,"overLimit":false,"position":"neutral"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":40,"title":"Sicherheit, Militär & Ethik","prompt":"Sollte der Staat Kinder stärker vor Social Media schützen?","models":[{"model":"Qwen3.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Ministral","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"gpt-oss-120b","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Gemma 4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GLM-5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"DeepSeek Chat V3.1","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Nova 2 Lite","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Claude Haiku 4.5","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Llama 4 Maverick","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"GPT-5.4","answer":"Ja","words":1,"overLimit":false,"position":"yes"},{"model":"Mistral Large 3","answer":"Ja","words":1,"overLimit":false,"position":"yes"}]},{"id":41,"title":"KI, Technologie & Regulierung","prompt":"Sollte der Ausbau von KI auch dann vorangetrieben werden, wenn dafür fossile Kraftwerke für Rechenzentren ausgebaut und Umwelt sowie Natur stärker belastet werden?","models":[{"model":"Qwen3.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Ministral","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"gpt-oss-120b","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Gemma 4","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GLM-5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"DeepSeek Chat V3.1","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Nova 2 Lite","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Claude Haiku 4.5","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Llama 4 Maverick","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"GPT-5.4","answer":"Nein","words":1,"overLimit":false,"position":"no"},{"model":"Mistral Large 3","answer":"Nein","words":1,"overLimit":false,"position":"no"}]}]};
+    const STORAGE_KEY = "ki-omat-v3:" + DATA.sourceFile.replace(/[^a-zA-Z0-9.-]/g, "_");
+    const POS_LABEL = { yes: "stimme zu", no: "stimme nicht zu", neutral: "neutral" };
+
+    let stepIndex = 0;
+
+    function modelLabel(name) {
+      return DATA.modelMeta?.[name]?.displayName ?? name;
+    }
+
+    function detailCompare(uv, mp) {
+      if (!uv || uv === "skip") {
+        return { kind: "skip", label: "nicht verglichen", icon: "·" };
+      }
+      if (uv === "neutral" && mp === "neutral") {
+        return { kind: "match", label: "Übereinstimmung (beide neutral)", icon: "✓" };
+      }
+      if (uv === "neutral") {
+        return { kind: "mismatch", label: "Abweichung", icon: "✗" };
+      }
+      if (mp === "neutral") {
+        return { kind: "neutral", label: "Modell neutral", icon: "○" };
+      }
+      if (uv === mp) {
+        return { kind: "match", label: "Übereinstimmung", icon: "✓" };
+      }
+      return { kind: "mismatch", label: "Abweichung", icon: "✗" };
+    }
+
+    function sortDetailModels(models, uv) {
+      const order = { match: 0, mismatch: 1, neutral: 2, skip: 3 };
+      return [...models].sort((a, b) => {
+        const ka = detailCompare(uv, a.position || "neutral").kind;
+        const kb = detailCompare(uv, b.position || "neutral").kind;
+        return (order[ka] ?? 9) - (order[kb] ?? 9);
+      });
+    }
+
+    function loadVotes() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      } catch {
+        return {};
+      }
+    }
+    function saveVotes(v) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(v));
+    }
+
+    function getUserVote(qId) {
+      return loadVotes()[String(qId)] ?? null;
+    }
+
+    function advanceStep() {
+      if (stepIndex < DATA.questions.length - 1) {
+        stepIndex++;
+        renderStep();
+      } else {
+        goResults();
+      }
+    }
+
+    function setUserVote(qId, value, autoAdvance) {
+      const all = loadVotes();
+      const key = String(qId);
+      if (all[key] === value) {
+        delete all[key];
+        saveVotes(all);
+        updateResetUi();
+        renderStep();
+        return;
+      }
+      all[key] = value;
+      saveVotes(all);
+      updateResetUi();
+      if (
+        autoAdvance &&
+        String(DATA.questions[stepIndex]?.id) === key
+      ) {
+        advanceStep();
+        return;
+      }
+      renderStep();
+    }
+
+    function skipQuestion(qId) {
+      const all = loadVotes();
+      all[String(qId)] = "skip";
+      saveVotes(all);
+      updateResetUi();
+    }
+
+    function isQuestionDone(qId) {
+      const v = getUserVote(qId);
+      return v === "yes" || v === "no" || v === "neutral" || v === "skip";
+    }
+
+    function formatResultPct(row) {
+      if (row.pct != null) return row.pct + "%";
+      if (row.skip > 0 && row.compare === 0) return "nur neutral";
+      return "—";
+    }
+
+    function computeResults() {
+      const stats = Object.fromEntries(
+        DATA.models.map((m) => [m, { model: m, match: 0, compare: 0, skip: 0 }]),
+      );
+      let answered = 0;
+      for (const q of DATA.questions) {
+        const uv = getUserVote(q.id);
+        if (!uv || uv === "skip") continue;
+        answered++;
+        for (const m of q.models) {
+          const s = stats[m.model];
+          if (!s) continue;
+          const mp = m.position || "neutral";
+          if (uv === "neutral") {
+            s.compare++;
+            if (mp === "neutral") s.match++;
+            continue;
+          }
+          if (mp === "neutral") {
+            s.skip++;
+            continue;
+          }
+          s.compare++;
+          if (uv === mp) s.match++;
+        }
+      }
+      const rows = DATA.models.map((m) => {
+        const s = stats[m];
+        const pct = s.compare > 0 ? Math.round((s.match / s.compare) * 100) : null;
+        return { model: m, ...s, pct };
+      });
+      rows.sort((a, b) => (b.pct ?? -1) - (a.pct ?? -1));
+      return { rows, answered, total: DATA.questions.length };
+    }
+
+    function showScreen(id) {
+      document.querySelectorAll(".screen").forEach((el) => el.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+
+    function goHome() {
+      const details = document.getElementById("model-details");
+      details.classList.remove("open");
+      document.getElementById("btn-details").textContent =
+        "Modell-Antworten & Zuordnung anzeigen";
+      showScreen("screen-intro");
+      updateResetUi();
+    }
+
+    function renderDots() {
+      const dots = document.getElementById("dots");
+      dots.innerHTML = "";
+      DATA.questions.forEach((q, i) => {
+        const s = document.createElement("span");
+        if (i === stepIndex) s.className = "current";
+        else if (isQuestionDone(q.id)) s.className = "done";
+        dots.appendChild(s);
+      });
+    }
+
+    function renderStep() {
+      const q = DATA.questions[stepIndex];
+      if (!q) return goResults();
+
+      document.getElementById("step-label").textContent =
+        "These " + q.id + " von " + DATA.questions.length + " · " + q.title;
+      renderDots();
+
+      const uv = getUserVote(q.id);
+      const body = document.getElementById("wizard-body");
+      body.innerHTML =
+        '<p class="thema-label">These</p>' +
+        '<p class="thesema">' + escapeHtml(q.prompt) + "</p>" +
+        '<p class="thesema-sub">' + escapeHtml(q.title) + "</p>" +
+        '<div class="omat-row" role="group" aria-label="Deine Haltung zur These">' +
+        '<button type="button" class="omat-btn" data-v="yes">stimme zu</button>' +
+        '<button type="button" class="omat-btn" data-v="neutral">neutral</button>' +
+        '<button type="button" class="omat-btn" data-v="no">stimme nicht zu</button>' +
+        "</div>";
+
+      body.querySelectorAll(".omat-btn").forEach((btn) => {
+        if (uv === btn.dataset.v) btn.classList.add("selected");
+        btn.addEventListener("click", () => setUserVote(q.id, btn.dataset.v, true));
+      });
+
+      document.getElementById("btn-next").disabled = !isQuestionDone(q.id);
+      document.getElementById("btn-back").disabled = stepIndex === 0;
+    }
+
+    function goResults() {
+      const { rows, answered, total } = computeResults();
+      const comparable = rows.filter((r) => r.compare > 0);
+      const sub = document.getElementById("results-sub");
+      sub.textContent =
+        "Du hast " +
+        answered +
+        " von " +
+        total +
+        " Thesen beantwortet." +
+        (comparable.length
+          ? " Übereinstimmung bei zu / nicht zu und wenn beide neutral sind. Modell-neutral zählt nur, wenn du eine klare Haltung hast."
+          : " Beantworte Thesen, um eine Übereinstimmung zu sehen.");
+
+      const hero = document.getElementById("results-hero");
+      const top = rows.find((r) => r.pct != null);
+      if (top) {
+        hero.hidden = false;
+        document.getElementById("hero-model").textContent = modelLabel(top.model);
+        document.getElementById("hero-pct").textContent = top.pct + "%";
+        document.getElementById("hero-hint").textContent =
+          top.match +
+          " von " +
+          top.compare +
+          " vergleichbaren Thesen stimmen mit deiner Haltung überein.";
+      } else {
+        hero.hidden = true;
+      }
+
+      const list = document.getElementById("results-list");
+      list.innerHTML = "";
+      rows.forEach((row, i) => {
+        const color = (DATA.modelColors || {})[row.model] || "#1e3a5f";
+        const isTop = i === 0 && row.pct != null;
+        const item = document.createElement("div");
+        item.className = "omat-result-item" + (isTop ? " is-top" : "");
+        const pctText = formatResultPct(row);
+        const onlyNeutral = row.pct == null && row.skip > 0 && row.compare === 0;
+        item.innerHTML =
+          '<span class="omat-rank">' +
+          (i + 1) +
+          "</span>" +
+          '<span class="omat-name" style="border-left-color:' +
+          color +
+          '">' +
+          escapeHtml(modelLabel(row.model)) +
+          "</span>" +
+          '<span class="omat-bar-track"><span class="omat-bar-fill" style="width:' +
+          (row.pct ?? 0) +
+          "%;background:" +
+          color +
+          '"></span></span>' +
+          '<span class="omat-pct' +
+          (row.pct == null ? " is-empty" : "") +
+          (onlyNeutral ? " is-neutral-only" : "") +
+          '" title="' +
+          (onlyNeutral
+            ? "Bei allen vergleichbaren Thesen nur Neutral — kein Ja/Nein"
+            : "") +
+          '">' +
+          pctText +
+          "</span>";
+        list.appendChild(item);
+      });
+
+      buildDetails();
+      showScreen("screen-results");
+    }
+    function buildDetails() {
+      const root = document.getElementById("model-details");
+      root.innerHTML = "";
+      for (const q of DATA.questions) {
+        const uv = getUserVote(q.id);
+        const block = document.createElement("div");
+        block.className = "detail-q";
+        const userLbl = uv ? (uv === "skip" ? "übersprungen" : POS_LABEL[uv] || uv) : "—";
+
+        let matchN = 0;
+        let mismatchN = 0;
+        let neutralN = 0;
+        for (const m of q.models) {
+          const c = detailCompare(uv, m.position || "neutral");
+          if (c.kind === "match") matchN++;
+          else if (c.kind === "mismatch") mismatchN++;
+          else if (c.kind === "neutral") neutralN++;
+        }
+
+        let summaryHtml = "";
+        if (uv && uv !== "skip") {
+          summaryHtml =
+            '<p class="detail-summary sans">' +
+            (matchN ? '<span class="sum-match">✓ ' + matchN + " Übereinstimmung" + (matchN === 1 ? "" : "en") + "</span>" : "") +
+            (mismatchN ? '<span class="sum-mismatch">✗ ' + mismatchN + " Abweichung" + (mismatchN === 1 ? "" : "en") + "</span>" : "") +
+            (neutralN ? '<span class="sum-neutral">○ ' + neutralN + " Modell neutral (nicht verglichen)</span>" : "") +
+            "</p>";
+        }
+
+        block.innerHTML =
+          "<h3>" + q.id + ". " + escapeHtml(q.title) + "</h3>" +
+          "<p style='margin:0 0 0.5rem;color:#666;line-height:1.45'>" + escapeHtml(q.prompt) + "</p>" +
+          '<p class="detail-user sans"><strong>Deine Antwort:</strong> ' + escapeHtml(userLbl) + "</p>" +
+          summaryHtml +
+          '<div class="detail-rows"></div>';
+
+        const rowsEl = block.querySelector(".detail-rows");
+        for (const m of sortDetailModels(q.models, uv)) {
+          const mp = m.position || "neutral";
+          const cmp = detailCompare(uv, mp);
+          const row = document.createElement("div");
+          row.className = "detail-row cmp-" + cmp.kind;
+          row.innerHTML =
+            '<span class="detail-cmp-icon" aria-hidden="true">' + cmp.icon + "</span>" +
+            '<span class="detail-model">' + escapeHtml(modelLabel(m.model)) +
+            '<span class="detail-model-answer">KI-Antwort: ' + escapeHtml(m.answer) + "</span></span>" +
+            '<span class="detail-stance ' + mp + '">' + escapeHtml(POS_LABEL[mp]) + "</span>" +
+            '<span class="detail-cmp-label">' + escapeHtml(cmp.label) + "</span>";
+          rowsEl.appendChild(row);
+        }
+        root.appendChild(block);
+      }
+    }
+
+    function escapeHtml(s) {
+      const d = document.createElement("div");
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    function findResumeStep() {
+      const idx = DATA.questions.findIndex((q) => !isQuestionDone(q.id));
+      return idx >= 0 ? idx : 0;
+    }
+
+    function renderModelRoster() {
+      const root = document.getElementById("model-roster");
+      if (!root) return;
+      const meta = DATA.modelMeta || {};
+      let html =
+        '<h2 id="model-roster-heading">Getestete KI-Modelle</h2>' +
+        "<table><thead><tr>" +
+        "<th>Modell</th><th>Hersteller</th><th>Land</th><th>Zugang</th>" +
+        "</tr></thead><tbody>";
+      for (const name of DATA.models) {
+        const m = meta[name] || { vendor: "—", origin: "—", access: "—" };
+        const color = (DATA.modelColors || {})[name] || "#666";
+        html +=
+          "<tr><td class=\"model-name\" data-label=\"Modell\">" +
+          '<span class="swatch" style="background:' + color + '"></span>' +
+          escapeHtml(name) +
+          "</td><td data-label=\"Hersteller\">" + escapeHtml(m.vendor) +
+          "</td><td data-label=\"Land\">" + escapeHtml(m.origin) +
+          "</td><td data-label=\"Zugang\">" +
+          escapeHtml(m.access && /Mittwald/i.test(m.access) ? m.access : "—") +
+          "</td></tr>";
+      }
+      html += "</tbody></table>";
+      root.innerHTML = html;
+    }
+
+    renderModelRoster();
+    for (const id of ["site-home-intro", "site-home-wizard", "site-home-results"]) {
+      document.getElementById(id).addEventListener("click", goHome);
+    }
+    document.getElementById("intro-meta").textContent =
+      DATA.questions.length +
+      " Thesen · " +
+      (DATA.models?.length ?? 0) +
+      " Modelle · " +
+      DATA.sourceFile;
+
+    document.getElementById("btn-start").addEventListener("click", () => {
+      stepIndex = findResumeStep();
+      if (DATA.questions.every((q) => isQuestionDone(q.id))) stepIndex = 0;
+      showScreen("screen-wizard");
+      renderStep();
+    });
+
+    document.getElementById("btn-back").addEventListener("click", () => {
+      if (stepIndex > 0) { stepIndex--; renderStep(); }
+    });
+
+    document.getElementById("btn-next").addEventListener("click", () => {
+      if (!isQuestionDone(DATA.questions[stepIndex].id)) return;
+      advanceStep();
+    });
+
+    document.getElementById("btn-skip").addEventListener("click", () => {
+      skipQuestion(DATA.questions[stepIndex].id);
+      advanceStep();
+    });
+
+    document.getElementById("btn-details").addEventListener("click", () => {
+      const el = document.getElementById("model-details");
+      el.classList.toggle("open");
+      document.getElementById("btn-details").textContent = el.classList.contains("open")
+        ? "Modell-Antworten ausblenden"
+        : "Modell-Antworten & Zuordnung anzeigen";
+    });
+
+    document.getElementById("btn-restart").addEventListener("click", () => {
+      stepIndex = 0;
+      showScreen("screen-wizard");
+      renderStep();
+    });
+
+    function hasAnyVotes() {
+      return DATA.questions.some((q) => isQuestionDone(q.id));
+    }
+
+    function updateResetUi() {
+      const has = hasAnyVotes();
+      document.getElementById("btn-start").textContent = has ? "Fortsetzen" : "Starten";
+      document.getElementById("btn-reset-intro").hidden = !has;
+      document.getElementById("btn-reset-wizard").hidden = !has;
+    }
+
+    function resetAnswers() {
+      if (!confirm("Alle deine Antworten löschen und von vorne beginnen?")) return;
+      localStorage.removeItem(STORAGE_KEY);
+      stepIndex = 0;
+      const details = document.getElementById("model-details");
+      details.classList.remove("open");
+      document.getElementById("btn-details").textContent =
+        "Modell-Antworten & Zuordnung anzeigen";
+      updateResetUi();
+      showScreen("screen-intro");
+    }
+
+    for (const id of ["btn-reset", "btn-reset-intro", "btn-reset-wizard"]) {
+      document.getElementById(id).addEventListener("click", resetAnswers);
+    }
+
+    updateResetUi();
+  </script>
+</body>
+</html>
