@@ -658,6 +658,34 @@
       .model-roster td:last-child { border-bottom: none; }
     }
 
+    .site-legal {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      text-align: center;
+      padding: 0.35rem 0.5rem max(0.35rem, env(safe-area-inset-bottom, 0px));
+      font-size: 0.68rem;
+      color: var(--muted);
+      background: rgba(244, 244, 244, 0.92);
+      border-top: 1px solid var(--border);
+    }
+    .site-legal a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .site-legal a:hover,
+    .site-legal a:focus-visible {
+      text-decoration: underline;
+    }
+    .screen.active {
+      padding-bottom: 2rem;
+    }
+    .wizard-footer .inner {
+      padding-bottom: 0.25rem;
+    }
+
     @media (max-width: 380px) {
       .wizard-header .top {
         flex-wrap: wrap;
@@ -753,6 +781,12 @@
       <button type="button" class="danger" id="btn-reset">Antworten zurücksetzen</button>
     </div>
   </section>
+
+  <nav class="site-legal sans" aria-label="Rechtliches">
+    <a href="impressum.html">Impressum</a>
+    <span aria-hidden="true"> · </span>
+    <a href="datenschutz.html">Datenschutz</a>
+  </nav>
 
   <script>
     const DATA = __DATA_JSON__;

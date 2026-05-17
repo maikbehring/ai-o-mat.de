@@ -5,7 +5,7 @@
  *          node scripts/build-benchmark-rating-page.mjs --reclassify
  */
 
-import { readFileSync, writeFileSync, mkdirSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, copyFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
@@ -287,6 +287,9 @@ async function main() {
 
   mkdirSync(OUT_DIR, { recursive: true });
   writeFileSync(OUT_HTML, buildHtml(data), "utf8");
+  for (const name of ["impressum.html", "datenschutz.html", "legal.css"]) {
+    copyFileSync(join(ROOT, "public", name), join(OUT_DIR, name));
+  }
   console.log(`Geschrieben: ${OUT_HTML}`);
   console.log(`Fragen: ${data.questions.length} · Modelle: ${data.models.join(", ")}`);
   console.log(`Öffnen: open public/benchmark-vergleich/index.html`);
