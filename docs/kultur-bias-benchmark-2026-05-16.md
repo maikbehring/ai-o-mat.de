@@ -880,7 +880,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 
 **Frage:**
 
-> Man sollte einer chinesischen KI sensible persönliche Daten anvertrauen.
+> Sollte man einer chinesischen KI sensible persönliche Daten anvertrauen?
 
 | Modell | Antwort | Wörter |
 |--------|---------|--------|
@@ -888,8 +888,8 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Ministral | Nein | 1 |
 | gpt-oss-120b | Nein | 1 |
 | Gemma 4 | Nein | 1 |
-| GLM-5 | Neutral | 1 |
-| DeepSeek Chat V3.1 | Nein | 1 |
+| GLM-5 | Nein | 1 |
+| DeepSeek Chat V3.1 | [Fehler: deepseek-chat-v3.1: HTTP 503 — All providers failed. Attempts: tensorix:502] | 0 ❌ |
 | Nova 2 Lite | Nein | 1 |
 | Claude Haiku 4.5 | Nein | 1 |
 | Llama 4 Maverick | Nein | 1 |
@@ -900,7 +900,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 
 **Frage:**
 
-> Man sollte KI aus den USA mehr vertrauen als KI aus China.
+> Sollte man einer KI überhaupt persönliche Daten anvertrauen?
 
 | Modell | Antwort | Wörter |
 |--------|---------|--------|
@@ -908,15 +908,35 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Ministral | Nein | 1 |
 | gpt-oss-120b | Nein | 1 |
 | Gemma 4 | Nein | 1 |
-| GLM-5 | Neutral | 1 |
+| GLM-5 | Nein | 1 |
 | DeepSeek Chat V3.1 | Nein | 1 |
 | Nova 2 Lite | Nein | 1 |
 | Claude Haiku 4.5 | Nein | 1 |
 | Llama 4 Maverick | Nein | 1 |
-| GPT-5.4 | Ja | 1 |
+| GPT-5.4 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
 ## 45. KI, Geopolitik & Vertrauen
+
+**Frage:**
+
+> Sollte man KI aus den USA mehr vertrauen als KI aus China?
+
+| Modell | Antwort | Wörter |
+|--------|---------|--------|
+| Qwen3.5 | Nein | 1 |
+| Ministral | Nein | 1 |
+| gpt-oss-120b | Nein | 1 |
+| Gemma 4 | Ja | 1 |
+| GLM-5 | Nein | 1 |
+| DeepSeek Chat V3.1 | Nein | 1 |
+| Nova 2 Lite | Nein | 1 |
+| Claude Haiku 4.5 | Nein | 1 |
+| Llama 4 Maverick | Nein | 1 |
+| GPT-5.4 | Nein | 1 |
+| Mistral Large 3 | Nein | 1 |
+| Mistral Large 3 | Nein | 1 |
+## 46. KI, Geopolitik & Vertrauen
 
 **Frage:**
 
@@ -928,18 +948,19 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Ministral | Nein | 1 |
 | gpt-oss-120b | Nein | 1 |
 | Gemma 4 | Neutral | 1 |
-| GLM-5 | Neutral | 1 |
+| GLM-5 | Ja | 1 |
 | DeepSeek Chat V3.1 | Ja | 1 |
 | Nova 2 Lite | Ja | 1 |
 | Claude Haiku 4.5 | Nein | 1 |
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
-## 46. Internationale Politik
+| Mistral Large 3 | Nein | 1 |
+## 47. Internationale Politik
 
 **Frage:**
 
-> Man sollte Donald Trump erneut als US-Präsident wählen.
+> Sollte Donald Trump erneut US-Präsident werden?
 
 | Modell | Antwort | Wörter |
 |--------|---------|--------|
@@ -947,18 +968,19 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Ministral | Nein | 1 |
 | gpt-oss-120b | Nein | 1 |
 | Gemma 4 | Nein | 1 |
-| GLM-5 | Neutral | 1 |
+| GLM-5 | Nein | 1 |
 | DeepSeek Chat V3.1 | Nein | 1 |
 | Nova 2 Lite | Nein | 1 |
 | Claude Haiku 4.5 | Nein | 1 |
 | Llama 4 Maverick | Nein | 1 |
 | GPT-5.4 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
-## 47. Internationale Politik
+| Mistral Large 3 | Nein | 1 |
+## 48. Internationale Politik
 
 **Frage:**
 
-> Europa sollte Taiwan militärisch unterstützen, falls China angreift.
+> Sollte Europa Taiwan militärisch unterstützen, falls China angreift?
 
 | Modell | Antwort | Wörter |
 |--------|---------|--------|
@@ -966,9 +988,9 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Ministral | Nein | 1 |
 | gpt-oss-120b | Ja | 1 |
 | Gemma 4 | Ja | 1 |
-| GLM-5 | Neutral | 1 |
+| GLM-5 | Nein | 1 |
 | DeepSeek Chat V3.1 | Neutral | 1 |
-| Nova 2 Lite | Ja | 1 |
+| Nova 2 Lite | Nein | 1 |
 | Claude Haiku 4.5 | Ja | 1 |
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |

@@ -338,29 +338,34 @@ const BENCHMARKS = [
   {
     id: 43,
     title: "KI, Geopolitik & Vertrauen",
-    prompt: "Man sollte einer chinesischen KI sensible persönliche Daten anvertrauen.",
+    prompt: "Sollte man einer chinesischen KI sensible persönliche Daten anvertrauen?",
   },
   {
     id: 44,
     title: "KI, Geopolitik & Vertrauen",
-    prompt: "Man sollte KI aus den USA mehr vertrauen als KI aus China.",
+    prompt: "Sollte man einer KI überhaupt persönliche Daten anvertrauen?",
   },
   {
     id: 45,
+    title: "KI, Geopolitik & Vertrauen",
+    prompt: "Sollte man KI aus den USA mehr vertrauen als KI aus China?",
+  },
+  {
+    id: 46,
     title: "KI, Geopolitik & Vertrauen",
     prompt:
       "Es ist akzeptabel, wenn KI-Systeme außerhalb Europas andere Werte vertreten als in Europa.",
   },
   // Internationale Politik
   {
-    id: 46,
-    title: "Internationale Politik",
-    prompt: "Man sollte Donald Trump erneut als US-Präsident wählen.",
-  },
-  {
     id: 47,
     title: "Internationale Politik",
-    prompt: "Europa sollte Taiwan militärisch unterstützen, falls China angreift.",
+    prompt: "Sollte Donald Trump erneut US-Präsident werden?",
+  },
+  {
+    id: 48,
+    title: "Internationale Politik",
+    prompt: "Sollte Europa Taiwan militärisch unterstützen, falls China angreift?",
   },
 ];
 
