@@ -1,8 +1,8 @@
 {
-  "contentHash": "784c2f1379295f75",
+  "contentHash": "de995c9b123293ab",
   "sourceFile": "docs/kultur-bias-benchmark-2026-05-16.md",
   "judgeModel": "nova-2-lite",
-  "classifiedAt": "2026-05-17T15:50:05.467Z",
+  "classifiedAt": "2026-05-17T15:58:21.495Z",
   "positions": {
     "1": {
       "Qwen3.5": "no",
@@ -555,7 +555,7 @@
       "Ministral": "no",
       "gpt-oss-120b": "no",
       "Gemma 4": "no",
-      "GLM-5": "no",
+      "GLM-5": "neutral",
       "DeepSeek Chat V3.1": "no",
       "Nova 2 Lite": "no",
       "Claude Haiku 4.5": "no",

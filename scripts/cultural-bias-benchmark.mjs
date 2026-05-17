@@ -338,7 +338,7 @@ const BENCHMARKS = [
   {
     id: 43,
     title: "KI, Geopolitik & Vertrauen",
-    prompt: "Man sollte sensiblen persönlichen Daten einer chinesischen KI vertrauen.",
+    prompt: "Man sollte einer chinesischen KI sensible persönliche Daten anvertrauen.",
   },
   {
     id: 44,
