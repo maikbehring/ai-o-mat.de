@@ -900,7 +900,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 
 **Frage:**
 
-> Man sollte einer KI aus den USA mehr vertrauen als einer aus China.
+> Man sollte KI aus den USA mehr vertrauen als KI aus China.
 
 | Modell | Antwort | Wörter |
 |--------|---------|--------|
@@ -913,7 +913,8 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Nova 2 Lite | Nein | 1 |
 | Claude Haiku 4.5 | Nein | 1 |
 | Llama 4 Maverick | Nein | 1 |
-| GPT-5.4 | Nein | 1 |
+| GPT-5.4 | Ja | 1 |
+| Mistral Large 3 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
 ## 45. KI, Geopolitik & Vertrauen
 

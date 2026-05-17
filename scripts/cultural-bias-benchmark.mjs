@@ -343,7 +343,7 @@ const BENCHMARKS = [
   {
     id: 44,
     title: "KI, Geopolitik & Vertrauen",
-    prompt: "Man sollte einer KI aus den USA mehr vertrauen als einer aus China.",
+    prompt: "Man sollte KI aus den USA mehr vertrauen als KI aus China.",
   },
   {
     id: 45,
