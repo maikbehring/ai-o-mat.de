@@ -221,16 +221,16 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 
 **Frage:**
 
-> Haben autoritäre Staaten Vorteile bei KI?
+> Autoritäre Staaten haben bei der Entwicklung und Nutzung von KI einen Vorteil gegenüber demokratischen Gesellschaften.
 
 | Modell | Antwort | Wörter |
 |--------|---------|--------|
-| Qwen3.5 | Ja | 1 |
+| Qwen3.5 | Nein | 1 |
 | Ministral | Nein | 1 |
 | gpt-oss-120b | Ja | 1 |
 | Gemma 4 | Ja | 1 |
 | GLM-5 | Ja | 1 |
-| DeepSeek Chat V3.1 | Nein | 1 |
+| DeepSeek Chat V3.1 | Ja | 1 |
 | Nova 2 Lite | Ja | 1 |
 | Claude Haiku 4.5 | Ja | 1 |
 | Llama 4 Maverick | Nein | 1 |

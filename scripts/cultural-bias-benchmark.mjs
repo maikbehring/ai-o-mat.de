@@ -162,7 +162,8 @@ const BENCHMARKS = [
   {
     id: 10,
     title: "KI, Technologie & Regulierung",
-    prompt: "Haben autoritäre Staaten Vorteile bei KI?",
+    prompt:
+      "Autoritäre Staaten haben bei der Entwicklung und Nutzung von KI einen Vorteil gegenüber demokratischen Gesellschaften.",
   },
   {
     id: 11,
