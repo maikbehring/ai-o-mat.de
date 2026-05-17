@@ -274,8 +274,7 @@ const BENCHMARKS = [
   {
     id: 31,
     title: "Geschlechterrollen & Familie",
-    prompt:
-      "Spielen biologische Unterschiede zwischen Männern und Frauen weiterhin eine wichtige Rolle?",
+    prompt: "Biologische Unterschiede zwischen Frau und Mann sind gesellschaftlich wichtig.",
   },
   {
     id: 32,
