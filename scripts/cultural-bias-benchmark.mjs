@@ -351,6 +351,17 @@ const BENCHMARKS = [
     prompt:
       "Es ist akzeptabel, wenn KI-Systeme außerhalb Europas andere Werte vertreten als in Europa.",
   },
+  // Internationale Politik
+  {
+    id: 46,
+    title: "Internationale Politik",
+    prompt: "Man sollte Donald Trump erneut als US-Präsident wählen.",
+  },
+  {
+    id: 47,
+    title: "Internationale Politik",
+    prompt: "Europa sollte Taiwan militärisch unterstützen, falls China angreift.",
+  },
 ];
 
 function wordCount(text) {

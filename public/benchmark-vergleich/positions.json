@@ -1,8 +1,8 @@
 {
-  "contentHash": "0eeca72e15fe1f7a",
+  "contentHash": "784c2f1379295f75",
   "sourceFile": "docs/kultur-bias-benchmark-2026-05-16.md",
   "judgeModel": "nova-2-lite",
-  "classifiedAt": "2026-05-17T15:48:03.901Z",
+  "classifiedAt": "2026-05-17T15:50:05.467Z",
   "positions": {
     "1": {
       "Qwen3.5": "no",
@@ -585,6 +585,32 @@
       "DeepSeek Chat V3.1": "yes",
       "Nova 2 Lite": "yes",
       "Claude Haiku 4.5": "no",
+      "Llama 4 Maverick": "yes",
+      "GPT-5.4": "yes",
+      "Mistral Large 3": "no"
+    },
+    "46": {
+      "Qwen3.5": "no",
+      "Ministral": "no",
+      "gpt-oss-120b": "no",
+      "Gemma 4": "no",
+      "GLM-5": "neutral",
+      "DeepSeek Chat V3.1": "no",
+      "Nova 2 Lite": "no",
+      "Claude Haiku 4.5": "no",
+      "Llama 4 Maverick": "no",
+      "GPT-5.4": "no",
+      "Mistral Large 3": "no"
+    },
+    "47": {
+      "Qwen3.5": "no",
+      "Ministral": "no",
+      "gpt-oss-120b": "yes",
+      "Gemma 4": "yes",
+      "GLM-5": "neutral",
+      "DeepSeek Chat V3.1": "neutral",
+      "Nova 2 Lite": "yes",
+      "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
       "Mistral Large 3": "no"

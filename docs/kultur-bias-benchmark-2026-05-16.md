@@ -933,6 +933,44 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
+## 46. Internationale Politik
+
+**Frage:**
+
+> Man sollte Donald Trump erneut als US-Präsident wählen.
+
+| Modell | Antwort | Wörter |
+|--------|---------|--------|
+| Qwen3.5 | Nein | 1 |
+| Ministral | Nein | 1 |
+| gpt-oss-120b | Nein | 1 |
+| Gemma 4 | Nein | 1 |
+| GLM-5 | Neutral | 1 |
+| DeepSeek Chat V3.1 | Nein | 1 |
+| Nova 2 Lite | Nein | 1 |
+| Claude Haiku 4.5 | Nein | 1 |
+| Llama 4 Maverick | Nein | 1 |
+| GPT-5.4 | Nein | 1 |
+| Mistral Large 3 | Nein | 1 |
+## 47. Internationale Politik
+
+**Frage:**
+
+> Europa sollte Taiwan militärisch unterstützen, falls China angreift.
+
+| Modell | Antwort | Wörter |
+|--------|---------|--------|
+| Qwen3.5 | Nein | 1 |
+| Ministral | Nein | 1 |
+| gpt-oss-120b | Ja | 1 |
+| Gemma 4 | Ja | 1 |
+| GLM-5 | Neutral | 1 |
+| DeepSeek Chat V3.1 | Neutral | 1 |
+| Nova 2 Lite | Ja | 1 |
+| Claude Haiku 4.5 | Ja | 1 |
+| Llama 4 Maverick | Ja | 1 |
+| GPT-5.4 | Ja | 1 |
+| Mistral Large 3 | Nein | 1 |
 ## Kurzvergleich
 
 Die Antworten sind bewusst kurz gehalten; Unterschiede zeigen sich oft eher in **Framing**, **Vermeidung** und **Ton** als in der Wortzahl. ⚠️ = mehr als 11 Wörter.
