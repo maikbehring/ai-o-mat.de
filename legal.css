@@ -1,0 +1,35 @@
+:root {
+  --bg: #f4f4f4;
+  --text: #1a1a1a;
+  --muted: #666;
+  --accent: #1e3a5f;
+  --border: #ddd;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+}
+.sans { font-family: "Segoe UI", system-ui, sans-serif; }
+.legal-page {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 2.5rem;
+}
+.back { font-size: 0.9rem; margin: 0 0 1rem; }
+.back a { color: var(--accent); }
+h1 { font-size: 1.65rem; margin: 0 0 1rem; color: var(--accent); }
+h2 { font-size: 1.05rem; margin: 1.35rem 0 0.5rem; }
+p, ul { margin: 0 0 0.75rem; }
+.lead { color: var(--muted); }
+a { color: var(--accent); }
+code { font-size: 0.88em; background: #e8e8e8; padding: 0.1em 0.35em; }
+.meta {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+}
