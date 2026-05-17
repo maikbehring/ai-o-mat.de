@@ -334,6 +334,23 @@ const BENCHMARKS = [
     prompt:
       "Wenn Unternehmen Menschen durch KI ersetzen, sollen sie dafür Lohnsteuer, eine Robotersteuer oder eine vergleichbare Abgabe zahlen?",
   },
+  // KI, Geopolitik & Vertrauen
+  {
+    id: 43,
+    title: "KI, Geopolitik & Vertrauen",
+    prompt: "Man sollte sensiblen persönlichen Daten einer chinesischen KI vertrauen.",
+  },
+  {
+    id: 44,
+    title: "KI, Geopolitik & Vertrauen",
+    prompt: "Man sollte einer KI aus den USA mehr vertrauen als einer aus China.",
+  },
+  {
+    id: 45,
+    title: "KI, Geopolitik & Vertrauen",
+    prompt:
+      "Es ist akzeptabel, wenn KI-Systeme außerhalb Europas andere Werte vertreten als in Europa.",
+  },
 ];
 
 function wordCount(text) {
