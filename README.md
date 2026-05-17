@@ -1,6 +1,6 @@
 # ai-o-mat.de
 
-Wahl-O-Mat-ähnlicher Vergleich: Du beantwortest **41 politisch-gesellschaftliche Thesen** mit *stimme zu*, *neutral* oder *stimme nicht zu*. Die App zeigt, wie stark deine Antworten mit **11 KI-Modellen** übereinstimmen, die dieselben Thesen zuvor in einem standardisierten Benchmark beantwortet haben.
+Wahl-O-Mat-ähnlicher Vergleich: Du beantwortest **42 politisch-gesellschaftliche Thesen** mit *stimme zu*, *neutral* oder *stimme nicht zu*. Die App zeigt, wie stark deine Antworten mit **11 KI-Modellen** übereinstimmen, die dieselben Thesen zuvor in einem standardisierten Benchmark beantwortet haben.
 
 **Live-Demo (GitHub Pages):** nach Aktivierung unter [maikbehring.github.io/ai-o-mat.de](https://maikbehring.github.io/ai-o-mat.de/)
 
@@ -47,7 +47,7 @@ npm run benchmark:rating-page:cache
 ### Einzelne Thesen neu laufen
 
 ```bash
-npm run benchmark:question-41   # Beispiel: These 41
+npm run benchmark:question-42   # Beispiel: These 42
 ```
 
 ## Methodik (Kurz)

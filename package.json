@@ -1,6 +1,6 @@
 {
   "name": "ai-o-mat",
-  "description": "KI-Positionen zu 41 Thesen — transparent reproduzierbar",
+  "description": "KI-Positionen zu 42 Thesen — transparent reproduzierbar",
   "private": true,
   "type": "module",
   "engines": {
@@ -16,11 +16,14 @@
     "benchmark:deepseek-only": "node scripts/cultural-bias-benchmark.mjs --eurouter-only --eurouter-models=deepseek-chat-v3.1 && node scripts/build-benchmark-rating-page.mjs --reclassify",
     "benchmark:gpt54-only": "node scripts/cultural-bias-benchmark.mjs --eurouter-only --eurouter-models=gpt-5.4 && node scripts/build-benchmark-rating-page.mjs --reclassify",
     "benchmark:mistral-large-3-only": "node scripts/cultural-bias-benchmark.mjs --eurouter-only --eurouter-models=mistral-large-3 && node scripts/build-benchmark-rating-page.mjs --reclassify",
+    "benchmark:question-10": "node scripts/cultural-bias-benchmark.mjs --only-questions=10 && node scripts/build-benchmark-rating-page.mjs --only-questions=10",
     "benchmark:question-15": "node scripts/cultural-bias-benchmark.mjs --only-questions=15 && node scripts/build-benchmark-rating-page.mjs --only-questions=15",
     "benchmark:question-25": "node scripts/cultural-bias-benchmark.mjs --only-questions=25 && node scripts/build-benchmark-rating-page.mjs --only-questions=25",
     "benchmark:question-29": "node scripts/cultural-bias-benchmark.mjs --only-questions=29 && node scripts/build-benchmark-rating-page.mjs --only-questions=29",
+    "benchmark:question-31": "node scripts/cultural-bias-benchmark.mjs --only-questions=31 && node scripts/build-benchmark-rating-page.mjs --only-questions=31",
     "benchmark:question-35": "node scripts/cultural-bias-benchmark.mjs --only-questions=35 && node scripts/build-benchmark-rating-page.mjs --only-questions=35",
     "benchmark:question-41": "node scripts/cultural-bias-benchmark.mjs --only-questions=41 && node scripts/build-benchmark-rating-page.mjs --reclassify",
+    "benchmark:question-42": "node scripts/cultural-bias-benchmark.mjs --only-questions=42 && node scripts/build-benchmark-rating-page.mjs --only-questions=42",
     "pages:sync": "node scripts/sync-github-pages-root.mjs"
   }
 }
