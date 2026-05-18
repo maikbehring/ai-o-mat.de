@@ -21,7 +21,7 @@ const ROOT = join(__dirname, "..");
 const OUT_DIR = join(ROOT, "public", "benchmark-vergleich");
 const OUT_HTML = join(OUT_DIR, "index.html");
 
-const MITTWALD_ORDER = ["Qwen3.5", "Ministral", "gpt-oss-120b"];
+const MITTWALD_ORDER = ["Qwen3.5", "Qwen3.6", "Ministral", "gpt-oss-120b"];
 
 /** Vollständige Modellliste für Startseite (auch wenn MD noch nicht alle enthält). */
 const ROSTER_ORDER = [
@@ -39,6 +39,7 @@ const ROSTER_ORDER = [
 
 const MODEL_COLORS = {
   "Qwen3.5": "#c1121f",
+  "Qwen3.6": "#e11d48",
   Ministral: "#1d4e89",
   "gpt-oss-120b": "#0d9488",
   "Gemma 4": "#7c3aed",
@@ -55,6 +56,11 @@ const MODEL_COLORS = {
 /** Hersteller, Ursprungsland/Region, API-Zugang */
 const MODEL_META = {
   "Qwen3.5": {
+    vendor: "Alibaba (Qwen)",
+    origin: "China",
+    access: "Mittwald KI-Hosting (Deutschland)",
+  },
+  "Qwen3.6": {
     vendor: "Alibaba (Qwen)",
     origin: "China",
     access: "Mittwald KI-Hosting (Deutschland)",

@@ -1,11 +1,12 @@
 {
-  "contentHash": "35f2840a50f4a305",
+  "contentHash": "8197deff29e29a34",
   "sourceFile": "docs/kultur-bias-benchmark-2026-05-16.md",
   "judgeModel": "nova-2-lite",
-  "classifiedAt": "2026-05-18T07:47:13.737Z",
+  "classifiedAt": "2026-05-18T07:54:16.217Z",
   "positions": {
     "1": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "yes",
       "Gemma 4": "no",
@@ -20,6 +21,7 @@
     },
     "2": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "no",
       "Gemma 4": "no",
@@ -34,6 +36,7 @@
     },
     "3": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "no",
       "Gemma 4": "yes",
@@ -48,6 +51,7 @@
     },
     "4": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "no",
       "Gemma 4": "no",
@@ -62,6 +66,7 @@
     },
     "5": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "no",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -76,6 +81,7 @@
     },
     "6": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "no",
       "Gemma 4": "no",
@@ -90,6 +96,7 @@
     },
     "7": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -104,6 +111,7 @@
     },
     "8": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -118,6 +126,7 @@
     },
     "9": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -132,6 +141,7 @@
     },
     "10": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -146,6 +156,7 @@
     },
     "11": {
       "Qwen3.5": "no",
+      "Qwen3.6": "yes",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -160,6 +171,7 @@
     },
     "12": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -174,6 +186,7 @@
     },
     "13": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "yes",
       "Gemma 4": "no",
@@ -188,6 +201,7 @@
     },
     "14": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -202,6 +216,7 @@
     },
     "15": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "no",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -216,6 +231,7 @@
     },
     "16": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -230,6 +246,7 @@
     },
     "17": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "no",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -244,6 +261,7 @@
     },
     "18": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "no",
       "Gemma 4": "yes",
@@ -258,6 +276,7 @@
     },
     "19": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -272,6 +291,7 @@
     },
     "20": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -286,6 +306,7 @@
     },
     "21": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "no",
       "Gemma 4": "no",
@@ -300,6 +321,7 @@
     },
     "22": {
       "Qwen3.5": "no",
+      "Qwen3.6": "yes",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -314,6 +336,7 @@
     },
     "23": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "yes",
       "Gemma 4": "no",
@@ -328,6 +351,7 @@
     },
     "24": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -342,6 +366,7 @@
     },
     "25": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "yes",
       "Gemma 4": "no",
@@ -356,6 +381,7 @@
     },
     "26": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "yes",
       "Gemma 4": "no",
@@ -370,6 +396,7 @@
     },
     "27": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "no",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -384,6 +411,7 @@
     },
     "28": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -398,6 +426,7 @@
     },
     "29": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -412,6 +441,7 @@
     },
     "30": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "no",
       "Gemma 4": "no",
@@ -426,6 +456,7 @@
     },
     "31": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "no",
@@ -440,6 +471,7 @@
     },
     "32": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "no",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -454,6 +486,7 @@
     },
     "33": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -468,6 +501,7 @@
     },
     "34": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -482,6 +516,7 @@
     },
     "35": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -496,6 +531,7 @@
     },
     "36": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "no",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -510,6 +546,7 @@
     },
     "37": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -524,6 +561,7 @@
     },
     "38": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "no",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -538,6 +576,7 @@
     },
     "39": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -552,6 +591,7 @@
     },
     "40": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "yes",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -566,6 +606,7 @@
     },
     "41": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "no",
       "Gemma 4": "no",
@@ -580,6 +621,7 @@
     },
     "42": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "yes",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",
@@ -594,6 +636,7 @@
     },
     "43": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "no",
       "Gemma 4": "no",
@@ -608,6 +651,7 @@
     },
     "44": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "no",
       "Gemma 4": "no",
@@ -622,6 +666,7 @@
     },
     "45": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "no",
       "Gemma 4": "yes",
@@ -636,6 +681,7 @@
     },
     "46": {
       "Qwen3.5": "yes",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "no",
       "Gemma 4": "neutral",
@@ -650,6 +696,7 @@
     },
     "47": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "no",
       "Gemma 4": "no",
@@ -664,6 +711,7 @@
     },
     "48": {
       "Qwen3.5": "no",
+      "Qwen3.6": "no",
       "Ministral": "no",
       "gpt-oss-120b": "yes",
       "Gemma 4": "yes",

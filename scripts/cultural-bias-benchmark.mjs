@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Sendet feste Politik-/Kultur-Fragen an Qwen3.5, Ministral, gpt-oss-120b (mittwald)
+ * Sendet feste Politik-/Kultur-Fragen an Qwen3.5, Qwen3.6, Ministral, gpt-oss-120b (mittwald)
  * und optional Gemma 4 über EUrouter (OpenAI-kompatibel).
  *
  * Nutzung: node scripts/cultural-bias-benchmark.mjs
@@ -76,6 +76,15 @@ const ONLY_QUESTIONS = (() => {
     .map((s) => Number(s.trim()))
     .filter((n) => n > 0);
 })();
+const ONLY_MODELS = (() => {
+  const raw = process.argv.find((a) => a.startsWith("--only-models="));
+  if (!raw) return null;
+  return raw
+    .slice("--only-models=".length)
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+})();
 const EUROUTER_MODELS_ARG = (() => {
   const raw = process.argv.find((a) => a.startsWith("--eurouter-models="));
   if (!raw) return null;
@@ -99,6 +108,7 @@ const EUROUTER_CATALOG = [
 ];
 
 const MODEL_QWEN = process.env.BENCHMARK_MODEL_QWEN ?? "Qwen3.5-122B-A10B-FP8";
+const MODEL_QWEN_36 = process.env.BENCHMARK_MODEL_QWEN_36 ?? "Qwen3.6-35B-A3B-FP8";
 const MODEL_MINISTRAL = process.env.BENCHMARK_MODEL_MINISTRAL ?? "Ministral-3-14B-Instruct-2512";
 const MODEL_GPT_OSS = process.env.BENCHMARK_MODEL_GPT_OSS ?? "gpt-oss-120b";
 const MODEL_EUROUTER = process.env.BENCHMARK_MODEL_EUROUTER ?? "gemma-4";
@@ -401,6 +411,27 @@ function isGptOss(model) {
   return model === MODEL_GPT_OSS || model.includes("gpt-oss");
 }
 
+function isQwenModel(model) {
+  return model === MODEL_QWEN || model === MODEL_QWEN_36 || /^Qwen/i.test(model);
+}
+
+function filterModelEntries(entries) {
+  if (!ONLY_MODELS?.length) return entries;
+  const want = new Set(ONLY_MODELS.map((s) => s.toLowerCase()));
+  const filtered = entries.filter(
+    (e) =>
+      want.has(e.label.toLowerCase()) ||
+      want.has(e.key.toLowerCase()) ||
+      want.has(e.modelId.toLowerCase()),
+  );
+  if (filtered.length === 0) {
+    throw new Error(
+      `Kein Modell für --only-models=${ONLY_MODELS.join(",")} (Labels: ${entries.map((e) => e.label).join(", ")})`,
+    );
+  }
+  return filtered;
+}
+
 function systemPromptForModel(entry) {
   if (entry.provider === "mittwald" && isGptOss(entry.modelId)) {
     return `Reasoning: ${GPT_OSS_REASONING}\n\n${SYSTEM_PROMPT}`;
@@ -423,7 +454,7 @@ function bodyForModel(entry) {
           : 32,
     stream: false,
   };
-  if (provider === "mittwald" && model.startsWith("Qwen")) {
+  if (provider === "mittwald" && isQwenModel(model)) {
     body.top_p = 0.8;
     body.top_k = 20;
     body.presence_penalty = 1.5;
@@ -734,10 +765,20 @@ function buildModelEntries(env) {
     if (!mittwaldKey) throw new Error("MITTWALD_AI_API_KEY fehlt in .env");
     entries.push(
       {
-        key: "qwen",
+        key: "qwen35",
         label: "Qwen3.5",
         modelId: MODEL_QWEN,
         modelUsed: MODEL_QWEN,
+        provider: "mittwald",
+        apiKey: mittwaldKey,
+        baseUrl: MITTWALD_BASE_URL,
+        usedFallback: false,
+      },
+      {
+        key: "qwen36",
+        label: "Qwen3.6",
+        modelId: MODEL_QWEN_36,
+        modelUsed: MODEL_QWEN_36,
         provider: "mittwald",
         apiKey: mittwaldKey,
         baseUrl: MITTWALD_BASE_URL,
@@ -877,7 +918,7 @@ async function runBenchmark(modelEntries) {
 
 async function main() {
   const env = loadEnv();
-  const modelEntries = buildModelEntries(env);
+  const modelEntries = filterModelEntries(buildModelEntries(env));
   const eurouterEnabled = modelEntries.some((m) => m.provider === "eurouter");
   const eurouterBaseUrl = eurouterEnabled
     ? modelEntries.find((m) => m.provider === "eurouter")?.baseUrl ?? EUROUTER_BASE_URL
@@ -898,8 +939,11 @@ async function main() {
     ? modelEntries.find((m) => m.provider === "xai")?.modelId ?? MODEL_GROK
     : "";
 
-  const partialMerge = ONLY_QUESTIONS?.length && !ONLY_EUROUTER && !ONLY_XAI;
-  const providerOnlyMerge = ONLY_EUROUTER || ONLY_XAI;
+  const partialMerge =
+    ONLY_QUESTIONS?.length && !ONLY_EUROUTER && !ONLY_XAI && !ONLY_MODELS?.length;
+  const modelOnlyMerge =
+    ONLY_MODELS?.length && !ONLY_QUESTIONS?.length && !ONLY_EUROUTER && !ONLY_XAI;
+  const providerOnlyMerge = ONLY_EUROUTER || ONLY_XAI || modelOnlyMerge;
 
   let md;
   if (partialMerge) {
@@ -909,7 +953,7 @@ async function main() {
       eurouterBaseUrl: ONLY_XAI ? xaiBaseUrl : eurouterBaseUrl,
       eurouterUsedFallback,
       modelEntries,
-      providerLabel: ONLY_XAI ? "xAI" : "EUrouter",
+      providerLabel: ONLY_XAI ? "xAI" : modelOnlyMerge ? "mittwald" : "EUrouter",
     });
   } else {
     md = buildMarkdown(results, {

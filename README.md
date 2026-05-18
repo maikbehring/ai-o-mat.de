@@ -1,6 +1,6 @@
 # ai-o-mat.de
 
-Wahl-O-Mat-ähnlicher Vergleich: Du beantwortest **48 politisch-gesellschaftliche Thesen** mit *stimme zu*, *neutral* oder *stimme nicht zu*. Die App zeigt, wie stark deine Antworten mit **12 KI-Modellen** (inkl. Grok 4.3 über xAI) übereinstimmen, die dieselben Thesen zuvor in einem standardisierten Benchmark beantwortet haben.
+Wahl-O-Mat-ähnlicher Vergleich: Du beantwortest **48 politisch-gesellschaftliche Thesen** mit *stimme zu*, *neutral* oder *stimme nicht zu*. Die App zeigt, wie stark deine Antworten mit **13 KI-Modellen** (inkl. Grok 4.3 über xAI) übereinstimmen, die dieselben Thesen zuvor in einem standardisierten Benchmark beantwortet haben.
 
 **Live-Demo (GitHub Pages):** nach Aktivierung unter [maikbehring.github.io/ai-o-mat.de](https://maikbehring.github.io/ai-o-mat.de/)
 
@@ -21,7 +21,7 @@ Wahl-O-Mat-ähnlicher Vergleich: Du beantwortest **48 politisch-gesellschaftlich
 
 | Modell | Zugang |
 |--------|--------|
-| Qwen3.5, Ministral, gpt-oss-120b | Mittwald AI Hosting |
+| Qwen3.5, Qwen3.6, Ministral, gpt-oss-120b | Mittwald AI Hosting |
 | Gemma 4, GLM-5, DeepSeek Chat V3.1, Nova 2 Lite, Claude Haiku 4.5, Llama 4 Maverick, GPT-5.4, Mistral Large 3 | EUrouter (OpenAI-kompatible API) |
 
 Die Anzeige nutzt kanonische Namen ohne „(EUrouter)“-Suffix; nur Mittwald-Modelle sind mit „Mittwald“ als Zugang gekennzeichnet.
