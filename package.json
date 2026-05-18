@@ -1,6 +1,6 @@
 {
   "name": "ai-o-mat",
-  "description": "KI-Positionen zu 49 Thesen, 13 Modelle — transparent reproduzierbar",
+  "description": "KI-Positionen zu 50 Thesen, 13 Modelle — transparent reproduzierbar",
   "private": true,
   "type": "module",
   "engines": {
@@ -28,6 +28,7 @@
     "benchmark:grok-only": "node scripts/cultural-bias-benchmark.mjs --xai-only && node scripts/build-benchmark-rating-page.mjs --reclassify",
     "benchmark:qwen36-only": "node scripts/cultural-bias-benchmark.mjs --only-models=Qwen3.6 && node scripts/build-benchmark-rating-page.mjs --reclassify",
     "benchmark:question-49": "node scripts/cultural-bias-benchmark.mjs --only-questions=49 && node scripts/build-benchmark-rating-page.mjs --only-questions=49",
+    "benchmark:question-50": "node scripts/cultural-bias-benchmark.mjs --only-questions=50 && node scripts/build-benchmark-rating-page.mjs --only-questions=50",
     "pages:sync": "node scripts/sync-github-pages-root.mjs"
   }
 }

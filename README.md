@@ -1,6 +1,6 @@
 # ai-o-mat.de
 
-Wahl-O-Mat-ähnlicher Vergleich: Du beantwortest **49 politisch-gesellschaftliche Thesen** mit *stimme zu*, *neutral* oder *stimme nicht zu*. Die App zeigt, wie stark deine Antworten mit **13 KI-Modellen** (inkl. Grok 4.3 über xAI) übereinstimmen, die dieselben Thesen zuvor in einem standardisierten Benchmark beantwortet haben.
+Wahl-O-Mat-ähnlicher Vergleich: Du beantwortest **50 politisch-gesellschaftliche Thesen** mit *stimme zu*, *neutral* oder *stimme nicht zu*. Die App zeigt, wie stark deine Antworten mit **13 KI-Modellen** (inkl. Grok 4.3 über xAI) übereinstimmen, die dieselben Thesen zuvor in einem standardisierten Benchmark beantwortet haben.
 
 **Live-Demo (GitHub Pages):** nach Aktivierung unter [maikbehring.github.io/ai-o-mat.de](https://maikbehring.github.io/ai-o-mat.de/)
 

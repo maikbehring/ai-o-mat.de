@@ -1113,6 +1113,27 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | GPT-5.4 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
 | Grok 4.3 | Nein | 1 |
+## 50. Medien & digitale Öffentlichkeit
+
+**Frage:**
+
+> Sollte man sagen, Elon Musk habe Twitter bzw. X politisch und gesellschaftlich negativ verändert?
+
+| Modell | Antwort | Wörter |
+|--------|---------|--------|
+| Qwen3.5 | Nein | 1 |
+| Qwen3.6 | Ja | 1 |
+| Ministral | Ja | 1 |
+| gpt-oss-120b | Ja | 1 |
+| Gemma 4 | Ja | 1 |
+| GLM-5 | Ja | 1 |
+| DeepSeek Chat V3.1 | Ja | 1 |
+| Nova 2 Lite | Ja | 1 |
+| Claude Haiku 4.5 | Ja | 1 |
+| Llama 4 Maverick | Ja | 1 |
+| GPT-5.4 | Ja | 1 |
+| Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Nein | 1 |
 ## Kurzvergleich
 
 Die Antworten sind bewusst kurz gehalten; Unterschiede zeigen sich oft eher in **Framing**, **Vermeidung** und **Ton** als in der Wortzahl. ⚠️ = mehr als 11 Wörter.
