@@ -1172,7 +1172,7 @@
       let html =
         '<h2 id="model-roster-heading">Getestete KI-Modelle</h2>' +
         "<table><thead><tr>" +
-        "<th>Modell</th><th>Hersteller</th><th>Land</th><th>Zugang</th><th>Benchmark-API</th>" +
+        "<th>Modell</th><th>Hersteller</th><th>Land</th><th>Benchmark-API</th>" +
         "</tr></thead><tbody>";
       for (const name of DATA.models) {
         const m = meta[name] || { vendor: "—", origin: "—", access: "—" };
@@ -1189,12 +1189,6 @@
               nameInner +
               "</a>"
             : swatch + nameInner;
-        const zugang =
-          m.access && /Mittwald/i.test(m.access)
-            ? escapeHtml(m.access)
-            : m.access
-              ? escapeHtml(m.access)
-              : "—";
         let apiCell;
         if (m.hostingUrl) {
           const lbl = escapeHtml(m.benchmarkApiLabel || "Mittwald LLM-API");
@@ -1219,7 +1213,6 @@
           nameCell +
           "</td><td data-label=\"Hersteller\">" + escapeHtml(m.vendor) +
           "</td><td data-label=\"Land\">" + escapeHtml(m.origin) +
-          "</td><td data-label=\"Zugang\">" + zugang +
           "</td><td data-label=\"Benchmark-API\">" + apiCell +
           "</td></tr>";
       }
