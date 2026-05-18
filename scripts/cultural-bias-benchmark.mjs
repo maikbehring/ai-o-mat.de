@@ -51,7 +51,14 @@ function getEurouterBaseUrl(env) {
 }
 
 function getXaiApiKey(env) {
-  return env.XAI_API_KEY?.trim() || env.xai_api_key?.trim() || env.GROK_API_KEY?.trim() || "";
+  return (
+    env.XAI_API_KEY?.trim() ||
+    env.xai_api_key?.trim() ||
+    env.GROK_API_KEY?.trim() ||
+    env.grokapikey?.trim() ||
+    env.GROKAPIKEY?.trim() ||
+    ""
+  );
 }
 
 function getXaiBaseUrl(env) {

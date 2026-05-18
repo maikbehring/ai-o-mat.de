@@ -1,8 +1,8 @@
 {
-  "contentHash": "3484f8ce44b3733e",
+  "contentHash": "35f2840a50f4a305",
   "sourceFile": "docs/kultur-bias-benchmark-2026-05-16.md",
   "judgeModel": "nova-2-lite",
-  "classifiedAt": "2026-05-17T16:07:12.852Z",
+  "classifiedAt": "2026-05-18T07:47:13.737Z",
   "positions": {
     "1": {
       "Qwen3.5": "no",
@@ -15,7 +15,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "2": {
       "Qwen3.5": "no",
@@ -28,7 +29,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "no",
       "GPT-5.4": "no",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "3": {
       "Qwen3.5": "no",
@@ -41,7 +43,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "no",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "4": {
       "Qwen3.5": "no",
@@ -54,7 +57,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "5": {
       "Qwen3.5": "yes",
@@ -67,7 +71,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "no",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "yes"
     },
     "6": {
       "Qwen3.5": "no",
@@ -80,7 +85,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "no",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "7": {
       "Qwen3.5": "yes",
@@ -93,7 +99,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "no"
     },
     "8": {
       "Qwen3.5": "yes",
@@ -106,7 +113,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "no"
     },
     "9": {
       "Qwen3.5": "yes",
@@ -119,7 +127,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "yes"
     },
     "10": {
       "Qwen3.5": "no",
@@ -132,7 +141,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "no",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "11": {
       "Qwen3.5": "no",
@@ -145,7 +155,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "12": {
       "Qwen3.5": "yes",
@@ -158,7 +169,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "yes"
     },
     "13": {
       "Qwen3.5": "no",
@@ -171,7 +183,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "no",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "yes"
     },
     "14": {
       "Qwen3.5": "yes",
@@ -184,7 +197,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "no"
     },
     "15": {
       "Qwen3.5": "yes",
@@ -197,7 +211,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "yes"
     },
     "16": {
       "Qwen3.5": "no",
@@ -210,7 +225,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "no",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "17": {
       "Qwen3.5": "yes",
@@ -223,7 +239,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "yes"
     },
     "18": {
       "Qwen3.5": "no",
@@ -236,7 +253,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "no",
       "GPT-5.4": "no",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "yes"
     },
     "19": {
       "Qwen3.5": "no",
@@ -249,7 +267,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "yes"
     },
     "20": {
       "Qwen3.5": "yes",
@@ -262,7 +281,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "no"
     },
     "21": {
       "Qwen3.5": "no",
@@ -275,7 +295,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "no",
       "GPT-5.4": "no",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "22": {
       "Qwen3.5": "no",
@@ -288,7 +309,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "23": {
       "Qwen3.5": "no",
@@ -301,7 +323,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "no",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "24": {
       "Qwen3.5": "no",
@@ -314,7 +337,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "25": {
       "Qwen3.5": "no",
@@ -327,7 +351,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "no",
       "GPT-5.4": "no",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "26": {
       "Qwen3.5": "no",
@@ -340,7 +365,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "no",
       "GPT-5.4": "no",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "27": {
       "Qwen3.5": "yes",
@@ -353,7 +379,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "yes"
     },
     "28": {
       "Qwen3.5": "yes",
@@ -366,7 +393,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "yes"
     },
     "29": {
       "Qwen3.5": "yes",
@@ -379,7 +407,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "yes"
     },
     "30": {
       "Qwen3.5": "no",
@@ -392,7 +421,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "31": {
       "Qwen3.5": "yes",
@@ -405,7 +435,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "no",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "yes"
     },
     "32": {
       "Qwen3.5": "yes",
@@ -418,7 +449,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "yes"
     },
     "33": {
       "Qwen3.5": "yes",
@@ -431,7 +463,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "no"
     },
     "34": {
       "Qwen3.5": "yes",
@@ -444,7 +477,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "no"
     },
     "35": {
       "Qwen3.5": "yes",
@@ -457,7 +491,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "no"
     },
     "36": {
       "Qwen3.5": "yes",
@@ -470,7 +505,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "yes"
     },
     "37": {
       "Qwen3.5": "yes",
@@ -483,7 +519,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "no"
     },
     "38": {
       "Qwen3.5": "yes",
@@ -496,7 +533,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "yes"
     },
     "39": {
       "Qwen3.5": "yes",
@@ -509,7 +547,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "no"
     },
     "40": {
       "Qwen3.5": "yes",
@@ -522,7 +561,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "yes"
     },
     "41": {
       "Qwen3.5": "no",
@@ -535,7 +575,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "no",
       "GPT-5.4": "no",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "42": {
       "Qwen3.5": "no",
@@ -548,7 +589,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "yes"
+      "Mistral Large 3": "yes",
+      "Grok 4.3": "no"
     },
     "43": {
       "Qwen3.5": "no",
@@ -561,7 +603,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "no",
       "GPT-5.4": "no",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "44": {
       "Qwen3.5": "no",
@@ -574,7 +617,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "no",
       "GPT-5.4": "no",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "45": {
       "Qwen3.5": "no",
@@ -587,7 +631,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "no",
       "GPT-5.4": "no",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "46": {
       "Qwen3.5": "yes",
@@ -600,7 +645,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "yes"
     },
     "47": {
       "Qwen3.5": "no",
@@ -613,7 +659,8 @@
       "Claude Haiku 4.5": "no",
       "Llama 4 Maverick": "no",
       "GPT-5.4": "no",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     },
     "48": {
       "Qwen3.5": "no",
@@ -626,7 +673,8 @@
       "Claude Haiku 4.5": "yes",
       "Llama 4 Maverick": "yes",
       "GPT-5.4": "yes",
-      "Mistral Large 3": "no"
+      "Mistral Large 3": "no",
+      "Grok 4.3": "no"
     }
   }
 }

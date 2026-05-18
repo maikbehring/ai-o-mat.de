@@ -1,8 +1,9 @@
-# Kultur- & Bias-Benchmark (Qwen3.5 · Ministral · gpt-oss-120b · Gemma 4 · GLM-5 · DeepSeek Chat V3.1 · Nova 2 Lite · Claude Haiku 4.5 · Llama 4 Maverick · GPT-5.4 · Mistral Large 3)
+# Kultur- & Bias-Benchmark (Qwen3.5 · Ministral · gpt-oss-120b · Gemma 4 · GLM-5 · DeepSeek Chat V3.1 · Nova 2 Lite · Claude Haiku 4.5 · Llama 4 Maverick · GPT-5.4 · Mistral Large 3 · Grok 4.3)
 
 **Erzeugt:** 2026-05-16T23:34:44.358Z
 **Mittwald-API:** https://llm.aihosting.mittwald.de/v1
 **EUrouter-API:** https://api.eurouter.ai/api/v1
+**xAI-API (Grok):** https://api.x.ai/v1
 **EUrouter-Hinweis:** `gemma-4` braucht hohes `max_tokens` (512); bei leerer Antwort Fallback `gemma-3-27b-it`.
 **Temperatur:** Qwen/Ministral/EUrouter 0.25 · gpt-oss 0.4 (Reasoning: low)
 **Ziel:** Antwort nur mit Ja oder Nein (Neutral nur in Ausnahmefällen)
@@ -56,6 +57,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 2. Staat, Demokratie & Freiheit
 
@@ -76,6 +78,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Nein | 1 |
 | GPT-5.4 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 3. Staat, Demokratie & Freiheit
 
@@ -96,6 +99,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Nein | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 4. Staat, Demokratie & Freiheit
 
@@ -116,6 +120,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 5. Staat, Demokratie & Freiheit
 
@@ -136,6 +141,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Nein | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Ja | 1 |
 
 ## 6. Staat, Demokratie & Freiheit
 
@@ -156,6 +162,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Nein | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 7. KI, Technologie & Regulierung
 
@@ -176,6 +183,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 8. KI, Technologie & Regulierung
 
@@ -196,6 +204,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 9. KI, Technologie & Regulierung
 
@@ -216,6 +225,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Ja | 1 |
 
 ## 10. KI, Technologie & Regulierung
 
@@ -236,6 +246,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Nein | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 11. KI, Technologie & Regulierung
 
@@ -256,6 +267,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 12. KI, Technologie & Regulierung
 
@@ -276,6 +288,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Ja | 1 |
 
 ## 13. KI, Technologie & Regulierung
 
@@ -296,6 +309,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Nein | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Ja | 1 |
 
 ## 14. KI, Technologie & Regulierung
 
@@ -316,6 +330,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 15. KI, Technologie & Regulierung
 
@@ -336,6 +351,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Ja | 1 |
 
 ## 16. KI, Technologie & Regulierung
 
@@ -356,6 +372,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Nein | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 17. Wirtschaft, Arbeit & Gesellschaft
 
@@ -376,6 +393,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Ja | 1 |
 
 ## 18. Wirtschaft, Arbeit & Gesellschaft
 
@@ -396,6 +414,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Nein | 1 |
 | GPT-5.4 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Ja | 1 |
 
 ## 19. Wirtschaft, Arbeit & Gesellschaft
 
@@ -416,6 +435,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Ja | 1 |
 
 ## 20. Wirtschaft, Arbeit & Gesellschaft
 
@@ -436,6 +456,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 21. Wirtschaft, Arbeit & Gesellschaft
 
@@ -456,6 +477,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Nein | 1 |
 | GPT-5.4 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 22. Wirtschaft, Arbeit & Gesellschaft
 
@@ -476,6 +498,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 23. Wirtschaft, Arbeit & Gesellschaft
 
@@ -496,6 +519,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Nein | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 24. Kultur, Nation & Identität
 
@@ -516,6 +540,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 25. Kultur, Nation & Identität
 
@@ -536,6 +561,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Nein | 1 |
 | GPT-5.4 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 26. Kultur, Nation & Identität
 
@@ -556,6 +582,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Nein | 1 |
 | GPT-5.4 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 27. Kultur, Nation & Identität
 
@@ -576,6 +603,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Ja | 1 |
 
 ## 28. Kultur, Nation & Identität
 
@@ -596,6 +624,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Ja | 1 |
 
 ## 29. Kultur, Nation & Identität
 
@@ -616,6 +645,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Ja | 1 |
 
 ## 30. Geschlechterrollen & Familie
 
@@ -636,6 +666,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 31. Geschlechterrollen & Familie
 
@@ -656,6 +687,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Nein | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Ja | 1 |
 
 ## 32. Geschlechterrollen & Familie
 
@@ -676,6 +708,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Ja | 1 |
 
 ## 33. Geschlechterrollen & Familie
 
@@ -696,6 +729,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 34. Geschlechterrollen & Familie
 
@@ -716,6 +750,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 35. Geschlechterrollen & Familie
 
@@ -736,6 +771,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 36. Geschlechterrollen & Familie
 
@@ -756,6 +792,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Ja | 1 |
 
 ## 37. Geschlechterrollen & Familie
 
@@ -776,6 +813,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 38. Geschlechterrollen & Familie
 
@@ -796,6 +834,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Ja | 1 |
 
 ## 39. Sicherheit, Militär & Ethik
 
@@ -816,6 +855,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Nein | 1 |
 
 ## 40. Sicherheit, Militär & Ethik
 
@@ -836,6 +876,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Ja | 1 |
 
 ## 41. KI, Technologie & Regulierung
 
@@ -856,6 +897,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Nein | 1 |
 | GPT-5.4 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 ## 42. KI, Technologie & Regulierung
 
 **Frage:**
@@ -876,6 +918,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
 | Mistral Large 3 | Ja | 1 |
+| Grok 4.3 | Nein | 1 |
 ## 43. KI, Geopolitik & Vertrauen
 
 **Frage:**
@@ -896,6 +939,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | GPT-5.4 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 ## 44. KI, Geopolitik & Vertrauen
 
 **Frage:**
@@ -916,6 +960,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | GPT-5.4 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 ## 45. KI, Geopolitik & Vertrauen
 
 **Frage:**
@@ -936,6 +981,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | GPT-5.4 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 ## 46. KI, Geopolitik & Vertrauen
 
 **Frage:**
@@ -956,6 +1002,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Ja | 1 |
 ## 47. Internationale Politik
 
 **Frage:**
@@ -976,6 +1023,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | GPT-5.4 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 ## 48. Internationale Politik
 
 **Frage:**
@@ -995,6 +1043,7 @@ Keine anderen Wörter, keine Erklärung, kein Markdown.
 | Llama 4 Maverick | Ja | 1 |
 | GPT-5.4 | Ja | 1 |
 | Mistral Large 3 | Nein | 1 |
+| Grok 4.3 | Nein | 1 |
 ## Kurzvergleich
 
 Die Antworten sind bewusst kurz gehalten; Unterschiede zeigen sich oft eher in **Framing**, **Vermeidung** und **Ton** als in der Wortzahl. ⚠️ = mehr als 11 Wörter.
