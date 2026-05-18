@@ -91,6 +91,25 @@
       word-break: break-word;
       margin-bottom: 1.25rem;
     }
+    .intro-api-hint {
+      font-size: clamp(0.78rem, 2.2vw, 0.88rem);
+      color: var(--muted);
+      line-height: 1.5;
+      max-width: 40rem;
+      margin: 0 auto 1rem;
+      text-align: center;
+      padding: 0 0.25rem;
+    }
+    .intro-api-hint .inline-api-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .intro-api-hint .inline-api-link:hover,
+    .intro-api-hint .inline-api-link:focus-visible {
+      text-decoration: underline;
+      outline: none;
+    }
     .btn-primary {
       font-family: inherit;
       font-size: 1.1rem;
@@ -589,6 +608,25 @@
       font-weight: 600;
       line-height: 1.35;
     }
+    .model-roster .model-name a.model-roster-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .model-roster .model-name a.model-roster-link:hover,
+    .model-roster .model-name a.model-roster-link:focus-visible {
+      text-decoration: underline;
+      outline: none;
+    }
+    .model-roster td a.api-link {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .model-roster td a.api-link:hover,
+    .model-roster td a.api-link:focus-visible {
+      text-decoration: underline;
+      outline: none;
+    }
     .model-roster .swatch {
       display: inline-block;
       width: 0.55rem;
@@ -726,6 +764,14 @@
           Antworten zurücksetzen
         </button>
       </div>
+      <p class="tagline sans intro-api-hint" id="intro-api-hint">
+        Vier Modelle laufen über
+        <a class="inline-api-link" href="https://developer.mittwald.de/docs/v2/platform/aihosting/introduction/" rel="noopener noreferrer" target="_blank"><strong>Mittwald KI-Hosting</strong></a>
+        (Modellnamen verlinken zur gleichen Dokumentation);
+        die übrigen Antworten stammen über
+        <a class="inline-api-link" href="https://eurouter.ai" rel="noopener noreferrer" target="_blank">EUrouter</a> bzw.
+        <a class="inline-api-link" href="https://docs.x.ai/" rel="noopener noreferrer" target="_blank">xAI</a> (jeweils eigene API).
+      </p>
       <div class="model-roster sans" id="model-roster" aria-labelledby="model-roster-heading"></div>
       <p class="tagline sans intro-meta" id="intro-meta"></p>
     </div>
@@ -1127,19 +1173,49 @@
       let html =
         '<h2 id="model-roster-heading">Getestete KI-Modelle</h2>' +
         "<table><thead><tr>" +
-        "<th>Modell</th><th>Hersteller</th><th>Land</th><th>Zugang</th>" +
+        "<th>Modell</th><th>Hersteller</th><th>Land</th><th>Zugang</th><th>Benchmark-API</th>" +
         "</tr></thead><tbody>";
       for (const name of DATA.models) {
         const m = meta[name] || { vendor: "—", origin: "—", access: "—" };
         const color = (DATA.modelColors || {})[name] || "#666";
+        const swatch =
+          '<span class="swatch" style="background:' + color + '" aria-hidden="true"></span>';
+        const nameInner = escapeHtml(name);
+        const nameCell =
+          m.hostingUrl
+            ? swatch +
+              '<a class="model-roster-link" href="' +
+              escapeHtml(m.hostingUrl) +
+              '" rel="noopener noreferrer" target="_blank">' +
+              nameInner +
+              "</a>"
+            : swatch + nameInner;
+        const zugang =
+          m.access && /Mittwald/i.test(m.access)
+            ? escapeHtml(m.access)
+            : m.access
+              ? escapeHtml(m.access)
+              : "—";
+        let apiCell;
+        if (m.hostingUrl) {
+          apiCell = escapeHtml(m.benchmarkApiLabel || "Mittwald LLM-API");
+        } else if (m.benchmarkApiUrl && m.benchmarkApiLabel) {
+          apiCell =
+            '<a class="api-link" href="' +
+            escapeHtml(m.benchmarkApiUrl) +
+            '" rel="noopener noreferrer" target="_blank">' +
+            escapeHtml(m.benchmarkApiLabel) +
+            "</a>";
+        } else {
+          apiCell = escapeHtml(m.benchmarkApiLabel || "—");
+        }
         html +=
           "<tr><td class=\"model-name\" data-label=\"Modell\">" +
-          '<span class="swatch" style="background:' + color + '"></span>' +
-          escapeHtml(name) +
+          nameCell +
           "</td><td data-label=\"Hersteller\">" + escapeHtml(m.vendor) +
           "</td><td data-label=\"Land\">" + escapeHtml(m.origin) +
-          "</td><td data-label=\"Zugang\">" +
-          escapeHtml(m.access && /Mittwald/i.test(m.access) ? m.access : "—") +
+          "</td><td data-label=\"Zugang\">" + zugang +
+          "</td><td data-label=\"Benchmark-API\">" + apiCell +
           "</td></tr>";
       }
       html += "</tbody></table>";

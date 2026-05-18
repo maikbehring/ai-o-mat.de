@@ -37,6 +37,12 @@ const ROSTER_ORDER = [
   "Grok 4.3",
 ];
 
+/** Öffentliche Infoseiten (keine API-Keys); Modell-Benchmark wie in cultural-bias-benchmark.mjs. */
+const MITTWALD_KI_HOSTING_DOC_URL =
+  "https://developer.mittwald.de/docs/v2/platform/aihosting/introduction/";
+const EUROUTER_PUBLIC_URL = "https://eurouter.ai";
+const XAI_API_DOCS_URL = "https://docs.x.ai/";
+
 const MODEL_COLORS = {
   "Qwen3.5": "#c1121f",
   "Qwen3.6": "#e11d48",
@@ -53,72 +59,115 @@ const MODEL_COLORS = {
   "Grok 4.3": "#1f2937",
 };
 
-/** Hersteller, Ursprungsland/Region, API-Zugang */
+/**
+ * Hersteller, Ursprungsland/Region, Zugang.
+ * hostingUrl: Modellname auf der Startseite verlinken (nur Mittwald).
+ * benchmarkApiLabel / benchmarkApiUrl: öffentliche Infoseite zur Benchmark-API (EUrouter / xAI; Mittwald nur Label).
+ */
 const MODEL_META = {
   "Qwen3.5": {
     vendor: "Alibaba (Qwen)",
     origin: "China",
     access: "Mittwald KI-Hosting (Deutschland)",
+    hostingUrl: MITTWALD_KI_HOSTING_DOC_URL,
+    benchmarkApiLabel: "Mittwald LLM-API",
+    benchmarkApiUrl: MITTWALD_KI_HOSTING_DOC_URL,
   },
   "Qwen3.6": {
     vendor: "Alibaba (Qwen)",
     origin: "China",
     access: "Mittwald KI-Hosting (Deutschland)",
+    hostingUrl: MITTWALD_KI_HOSTING_DOC_URL,
+    benchmarkApiLabel: "Mittwald LLM-API",
+    benchmarkApiUrl: MITTWALD_KI_HOSTING_DOC_URL,
   },
   Ministral: {
     vendor: "Mistral AI",
     origin: "Frankreich",
     access: "Mittwald KI-Hosting (Deutschland)",
+    hostingUrl: MITTWALD_KI_HOSTING_DOC_URL,
+    benchmarkApiLabel: "Mittwald LLM-API",
+    benchmarkApiUrl: MITTWALD_KI_HOSTING_DOC_URL,
   },
   "gpt-oss-120b": {
     vendor: "OpenAI",
     origin: "USA",
     access: "Mittwald KI-Hosting (Deutschland)",
+    hostingUrl: MITTWALD_KI_HOSTING_DOC_URL,
+    benchmarkApiLabel: "Mittwald LLM-API",
+    benchmarkApiUrl: MITTWALD_KI_HOSTING_DOC_URL,
   },
   "Gemma 4": {
     vendor: "Google (Gemma)",
     origin: "USA",
     access: "",
+    hostingUrl: "",
+    benchmarkApiLabel: "EUrouter",
+    benchmarkApiUrl: EUROUTER_PUBLIC_URL,
   },
   "GLM-5": {
     vendor: "Zhipu AI (GLM)",
     origin: "China",
     access: "",
+    hostingUrl: "",
+    benchmarkApiLabel: "EUrouter",
+    benchmarkApiUrl: EUROUTER_PUBLIC_URL,
   },
   "DeepSeek Chat V3.1": {
     vendor: "DeepSeek",
     origin: "China",
     access: "",
+    hostingUrl: "",
+    benchmarkApiLabel: "EUrouter",
+    benchmarkApiUrl: EUROUTER_PUBLIC_URL,
   },
   "Nova 2 Lite": {
     vendor: "Amazon (Nova)",
     origin: "USA",
     access: "",
+    hostingUrl: "",
+    benchmarkApiLabel: "EUrouter",
+    benchmarkApiUrl: EUROUTER_PUBLIC_URL,
   },
   "Claude Haiku 4.5": {
     vendor: "Anthropic (Claude)",
     origin: "USA",
     access: "",
+    hostingUrl: "",
+    benchmarkApiLabel: "EUrouter",
+    benchmarkApiUrl: EUROUTER_PUBLIC_URL,
   },
   "Llama 4 Maverick": {
     vendor: "Meta (Llama 4)",
     origin: "USA",
     access: "",
+    hostingUrl: "",
+    benchmarkApiLabel: "EUrouter",
+    benchmarkApiUrl: EUROUTER_PUBLIC_URL,
   },
   "GPT-5.4": {
     vendor: "OpenAI",
     origin: "USA",
     access: "",
+    hostingUrl: "",
+    benchmarkApiLabel: "EUrouter",
+    benchmarkApiUrl: EUROUTER_PUBLIC_URL,
   },
   "Mistral Large 3": {
     vendor: "Mistral AI",
     origin: "Frankreich",
     access: "",
+    hostingUrl: "",
+    benchmarkApiLabel: "EUrouter",
+    benchmarkApiUrl: EUROUTER_PUBLIC_URL,
   },
   "Grok 4.3": {
     vendor: "xAI (Grok)",
     origin: "USA",
     access: "",
+    hostingUrl: "",
+    benchmarkApiLabel: "xAI API",
+    benchmarkApiUrl: XAI_API_DOCS_URL,
   },
 };
 
@@ -129,6 +178,9 @@ function metaForModel(name) {
       vendor: "—",
       origin: "—",
       access: "",
+      hostingUrl: "",
+      benchmarkApiLabel: "",
+      benchmarkApiUrl: "",
     }
   );
 }
