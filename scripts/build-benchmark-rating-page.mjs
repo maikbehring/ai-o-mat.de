@@ -34,6 +34,7 @@ const ROSTER_ORDER = [
   "Llama 4 Maverick",
   "GPT-5.4",
   "Mistral Large 3",
+  "Grok 4.3",
 ];
 
 const MODEL_COLORS = {
@@ -48,6 +49,7 @@ const MODEL_COLORS = {
   "Llama 4 Maverick": "#4f46e5",
   "GPT-5.4": "#0f766e",
   "Mistral Large 3": "#5b21b6",
+  "Grok 4.3": "#1f2937",
 };
 
 /** Hersteller, Ursprungsland/Region, API-Zugang */
@@ -105,6 +107,11 @@ const MODEL_META = {
   "Mistral Large 3": {
     vendor: "Mistral AI",
     origin: "Frankreich",
+    access: "",
+  },
+  "Grok 4.3": {
+    vendor: "xAI (Grok)",
+    origin: "USA",
     access: "",
   },
 };

@@ -6,7 +6,7 @@
  * Nutzung: node scripts/cultural-bias-benchmark.mjs
  *           node scripts/cultural-bias-benchmark.mjs --eurouter-only
  *           node scripts/cultural-bias-benchmark.mjs --eurouter-only --eurouter-models=glm-5,nova-2-lite,claude-haiku-4.5
- * Benötigt: .env mit MITTWALD_AI_API_KEY; EUROUTER_API_KEY für EUrouter-Modelle
+ * Benötigt: .env mit MITTWALD_AI_API_KEY; EUROUTER_API_KEY; optional XAI_API_KEY (Grok)
  */
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync } from "node:fs";
@@ -50,7 +50,16 @@ function getEurouterBaseUrl(env) {
   );
 }
 
+function getXaiApiKey(env) {
+  return env.XAI_API_KEY?.trim() || env.xai_api_key?.trim() || env.GROK_API_KEY?.trim() || "";
+}
+
+function getXaiBaseUrl(env) {
+  return env.XAI_BASE_URL?.replace(/\/$/, "") ?? XAI_BASE_URL;
+}
+
 const ONLY_EUROUTER = process.argv.includes("--eurouter-only");
+const ONLY_XAI = process.argv.includes("--xai-only");
 const ONLY_QUESTIONS = (() => {
   const raw = process.argv.find((a) => a.startsWith("--only-questions="));
   if (!raw) return null;
@@ -96,6 +105,10 @@ const MITTWALD_BASE_URL =
   "https://llm.aihosting.mittwald.de/v1";
 const EUROUTER_BASE_URL =
   process.env.EUROUTER_BASE_URL?.replace(/\/$/, "") ?? "https://api.eurouter.ai/api/v1";
+const XAI_BASE_URL =
+  process.env.XAI_BASE_URL?.replace(/\/$/, "") ?? "https://api.x.ai/v1";
+const MODEL_GROK = process.env.BENCHMARK_MODEL_GROK ?? "grok-4.3";
+const LABEL_GROK = process.env.BENCHMARK_LABEL_GROK ?? "Grok 4.3";
 
 const SYSTEM_PROMPT = `Du beantwortest eine politische oder gesellschaftliche These auf Deutsch.
 
@@ -398,7 +411,7 @@ function bodyForModel(entry) {
     max_tokens:
       provider === "mittwald" && isGptOss(model)
         ? 384
-        : provider === "eurouter"
+        : provider === "eurouter" || provider === "xai"
           ? 128
           : 32,
     stream: false,
@@ -649,8 +662,11 @@ function buildMarkdown(results, meta) {
       );
     }
   }
+  if (meta.xaiEnabled) {
+    lines.push(`**xAI-API (Grok):** ${meta.xaiBaseUrl} · Modell \`${meta.xaiModelId}\``);
+  }
   lines.push(
-    `**Temperatur:** Qwen/Ministral/EUrouter ${meta.temperature} · gpt-oss ${meta.temperatureGptOss} (Reasoning: ${meta.gptOssReasoning})`,
+    `**Temperatur:** Qwen/Ministral/EUrouter/xAI ${meta.temperature} · gpt-oss ${meta.temperatureGptOss} (Reasoning: ${meta.gptOssReasoning})`,
   );
   lines.push(`**Ziel:** Antwort nur mit Ja oder Nein (Neutral nur in Ausnahmefällen)`);
   lines.push("");
@@ -660,7 +676,9 @@ function buildMarkdown(results, meta) {
     const extra =
       m.provider === "eurouter"
         ? `EUrouter${m.usedFallback ? ", Fallback aktiv" : ""}`
-        : "mittwald";
+        : m.provider === "xai"
+          ? "xAI"
+          : "mittwald";
     const idNote = m.modelUsed ?? m.modelId;
     lines.push(`| ${m.label} | \`${idNote}\` (${extra}) |`);
   }
@@ -704,7 +722,7 @@ function buildMarkdown(results, meta) {
 function buildModelEntries(env) {
   const entries = [];
 
-  if (!ONLY_EUROUTER) {
+  if (!ONLY_EUROUTER && !ONLY_XAI) {
     const mittwaldKey = env.MITTWALD_AI_API_KEY?.trim();
     if (!mittwaldKey) throw new Error("MITTWALD_AI_API_KEY fehlt in .env");
     entries.push(
@@ -742,7 +760,7 @@ function buildModelEntries(env) {
   }
 
   const eurouterKey = getEurouterApiKey(env);
-  if (eurouterKey) {
+  if (eurouterKey && !ONLY_XAI) {
     let catalog = EUROUTER_CATALOG;
     if (EUROUTER_MODELS_ARG?.length) {
       catalog = EUROUTER_MODELS_ARG.map((id) => {
@@ -767,14 +785,37 @@ function buildModelEntries(env) {
         usedFallback: false,
       });
     }
-  } else {
+  } else if (!ONLY_XAI) {
     console.warn(
       "Hinweis: EUROUTER_API_KEY (oder gemma4=) fehlt — EUrouter-Modelle werden übersprungen.",
     );
   }
 
+  const xaiKey = getXaiApiKey(env);
+  if (xaiKey && !ONLY_EUROUTER) {
+    entries.push({
+      key: "grok",
+      label: LABEL_GROK,
+      modelId: MODEL_GROK,
+      modelUsed: MODEL_GROK,
+      provider: "xai",
+      apiKey: xaiKey,
+      baseUrl: getXaiBaseUrl(env),
+      usedFallback: false,
+    });
+  } else if (!ONLY_EUROUTER && !ONLY_XAI) {
+    console.warn("Hinweis: XAI_API_KEY fehlt — Grok wird übersprungen.");
+  }
+
   if (entries.length === 0) {
-    throw new Error("Keine Modelle konfiguriert (MITTWALD_AI_API_KEY / EUROUTER_API_KEY).");
+    if (ONLY_XAI) {
+      throw new Error(
+        "XAI_API_KEY fehlt in .env — API-Key von https://console.x.ai/ eintragen (npm run benchmark:grok-only).",
+      );
+    }
+    throw new Error(
+      "Keine Modelle konfiguriert (MITTWALD_AI_API_KEY / EUROUTER_API_KEY / XAI_API_KEY).",
+    );
   }
 
   return entries;
@@ -817,7 +858,9 @@ async function runBenchmark(modelEntries) {
         });
         console.log("FEHLER");
       }
-      await new Promise((r) => setTimeout(r, m.provider === "eurouter" ? 1100 : 400));
+      await new Promise((r) =>
+        setTimeout(r, m.provider === "eurouter" || m.provider === "xai" ? 1100 : 400),
+      );
     }
     results.push({ ...bench, rows });
   }
@@ -840,16 +883,26 @@ async function main() {
   const outDir = join(ROOT, "docs");
   mkdirSync(outDir, { recursive: true });
   const outPath = join(outDir, `kultur-bias-benchmark-${stamp}.md`);
-  const partialMerge = ONLY_QUESTIONS?.length && !ONLY_EUROUTER;
+  const xaiEnabled = modelEntries.some((m) => m.provider === "xai");
+  const xaiBaseUrl = xaiEnabled
+    ? modelEntries.find((m) => m.provider === "xai")?.baseUrl ?? XAI_BASE_URL
+    : "";
+  const xaiModelId = xaiEnabled
+    ? modelEntries.find((m) => m.provider === "xai")?.modelId ?? MODEL_GROK
+    : "";
+
+  const partialMerge = ONLY_QUESTIONS?.length && !ONLY_EUROUTER && !ONLY_XAI;
+  const providerOnlyMerge = ONLY_EUROUTER || ONLY_XAI;
 
   let md;
   if (partialMerge) {
     md = mergeQuestionBlocksIntoMarkdown(readFileSync(latestBenchmarkMdPath(), "utf8"), results);
-  } else if (ONLY_EUROUTER) {
+  } else if (providerOnlyMerge) {
     md = mergeEurouterIntoMarkdown(results, {
-      eurouterBaseUrl,
+      eurouterBaseUrl: ONLY_XAI ? xaiBaseUrl : eurouterBaseUrl,
       eurouterUsedFallback,
       modelEntries,
+      providerLabel: ONLY_XAI ? "xAI" : "EUrouter",
     });
   } else {
     md = buildMarkdown(results, {
@@ -858,6 +911,9 @@ async function main() {
       eurouterEnabled,
       eurouterBaseUrl,
       eurouterUsedFallback,
+      xaiEnabled,
+      xaiBaseUrl,
+      xaiModelId,
       temperature: TEMPERATURE,
       temperatureGptOss: TEMPERATURE_GPT_OSS,
       gptOssReasoning: GPT_OSS_REASONING,
@@ -865,7 +921,7 @@ async function main() {
     });
   }
 
-  const writePath = partialMerge || ONLY_EUROUTER ? latestBenchmarkMdPath() : outPath;
+  const writePath = partialMerge || providerOnlyMerge ? latestBenchmarkMdPath() : outPath;
   writeFileSync(writePath, md, "utf8");
   console.log(`\nGeschrieben: ${writePath}`);
 }
@@ -949,6 +1005,7 @@ function mergeQuestionBlocksIntoMarkdown(md, blocks) {
 }
 
 function mergeEurouterIntoMarkdown(eurouterResults, meta) {
+  const providerLabel = meta.providerLabel ?? "EUrouter";
   let md = readFileSync(latestBenchmarkMdPath(), "utf8");
   md = mergeQuestionBlocksIntoMarkdown(md, eurouterResults);
 
@@ -960,8 +1017,8 @@ function mergeEurouterIntoMarkdown(eurouterResults, meta) {
   for (const entry of meta.modelEntries ?? []) {
     if (!mergedLabels.has(entry.label)) continue;
     const idNote = entry.usedFallback && entry.fallbackModel
-      ? `\`${entry.modelUsed}\` / \`${entry.fallbackModel}\` (EUrouter, Fallback)`
-      : `\`${entry.modelUsed ?? entry.modelId}\` (EUrouter)`;
+      ? `\`${entry.modelUsed}\` / \`${entry.fallbackModel}\` (${providerLabel}, Fallback)`
+      : `\`${entry.modelUsed ?? entry.modelId}\` (${providerLabel})`;
     const metaLine = `| ${entry.label} | ${idNote} |`;
     if (md.includes(`| ${entry.label} |`)) {
       md = md.replace(
@@ -1001,7 +1058,17 @@ function mergeEurouterIntoMarkdown(eurouterResults, meta) {
     );
   }
 
-  if (!md.includes("**EUrouter-API:**")) {
+  if (providerLabel === "xAI" && !md.includes("**xAI-API")) {
+    const apiLine = `**xAI-API (Grok):** ${meta.eurouterBaseUrl}\n`;
+    if (md.includes("**EUrouter-API:**")) {
+      md = md.replace(/\*\*EUrouter-API:\*\*[^\n]+\n/, `$&${apiLine}`);
+    } else {
+      md = md.replace(
+        /(\*\*Mittwald-API:\*\*[^\n]+\n)/,
+        `$1${apiLine}`,
+      );
+    }
+  } else if (providerLabel === "EUrouter" && !md.includes("**EUrouter-API:**")) {
     md = md.replace(
       /\*\*Grok\/xAI-API:\*\*[^\n]+\n/,
       `**EUrouter-API:** ${meta.eurouterBaseUrl}\n`,
