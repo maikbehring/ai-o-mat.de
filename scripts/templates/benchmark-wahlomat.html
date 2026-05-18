@@ -766,10 +766,9 @@
       </div>
       <p class="tagline sans intro-api-hint" id="intro-api-hint">
         Vier Modelle laufen über
-        <a class="inline-api-link" href="https://developer.mittwald.de/docs/v2/platform/aihosting/introduction/" rel="noopener noreferrer" target="_blank"><strong>Mittwald KI-Hosting</strong></a>
-        (Modellnamen verlinken zur gleichen Dokumentation);
-        die übrigen Antworten stammen über
-        <a class="inline-api-link" href="https://eurouter.ai" rel="noopener noreferrer" target="_blank">EUrouter</a> bzw.
+        <a class="inline-api-link" href="https://www.mittwald.de/mstudio/ai-hosting" rel="noopener noreferrer" target="_blank"><strong>Mittwald KI-Hosting</strong></a>
+        (Modellnamen und „Mittwald LLM-API“ verlinken dorthin);
+        die übrigen Antworten stammen über EUrouter bzw.
         <a class="inline-api-link" href="https://docs.x.ai/" rel="noopener noreferrer" target="_blank">xAI</a> (jeweils eigene API).
       </p>
       <div class="model-roster sans" id="model-roster" aria-labelledby="model-roster-heading"></div>
@@ -1198,7 +1197,13 @@
               : "—";
         let apiCell;
         if (m.hostingUrl) {
-          apiCell = escapeHtml(m.benchmarkApiLabel || "Mittwald LLM-API");
+          const lbl = escapeHtml(m.benchmarkApiLabel || "Mittwald LLM-API");
+          apiCell =
+            '<a class="api-link" href="' +
+            escapeHtml(m.hostingUrl) +
+            '" rel="noopener noreferrer" target="_blank">' +
+            lbl +
+            "</a>";
         } else if (m.benchmarkApiUrl && m.benchmarkApiLabel) {
           apiCell =
             '<a class="api-link" href="' +

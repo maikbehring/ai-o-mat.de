@@ -38,9 +38,7 @@ const ROSTER_ORDER = [
 ];
 
 /** Öffentliche Infoseiten (keine API-Keys); Modell-Benchmark wie in cultural-bias-benchmark.mjs. */
-const MITTWALD_KI_HOSTING_DOC_URL =
-  "https://developer.mittwald.de/docs/v2/platform/aihosting/introduction/";
-const EUROUTER_PUBLIC_URL = "https://eurouter.ai";
+const MITTWALD_AI_HOSTING_URL = "https://www.mittwald.de/mstudio/ai-hosting";
 const XAI_API_DOCS_URL = "https://docs.x.ai/";
 
 const MODEL_COLORS = {
@@ -62,40 +60,40 @@ const MODEL_COLORS = {
 /**
  * Hersteller, Ursprungsland/Region, Zugang.
  * hostingUrl: Modellname auf der Startseite verlinken (nur Mittwald).
- * benchmarkApiLabel / benchmarkApiUrl: öffentliche Infoseite zur Benchmark-API (EUrouter / xAI; Mittwald nur Label).
+ * benchmarkApiLabel / benchmarkApiUrl: Infoseite zur Benchmark-API (nur xAI verlinkt; EUrouter nur Text).
  */
 const MODEL_META = {
   "Qwen3.5": {
     vendor: "Alibaba (Qwen)",
     origin: "China",
     access: "Mittwald KI-Hosting (Deutschland)",
-    hostingUrl: MITTWALD_KI_HOSTING_DOC_URL,
+    hostingUrl: MITTWALD_AI_HOSTING_URL,
     benchmarkApiLabel: "Mittwald LLM-API",
-    benchmarkApiUrl: MITTWALD_KI_HOSTING_DOC_URL,
+    benchmarkApiUrl: MITTWALD_AI_HOSTING_URL,
   },
   "Qwen3.6": {
     vendor: "Alibaba (Qwen)",
     origin: "China",
     access: "Mittwald KI-Hosting (Deutschland)",
-    hostingUrl: MITTWALD_KI_HOSTING_DOC_URL,
+    hostingUrl: MITTWALD_AI_HOSTING_URL,
     benchmarkApiLabel: "Mittwald LLM-API",
-    benchmarkApiUrl: MITTWALD_KI_HOSTING_DOC_URL,
+    benchmarkApiUrl: MITTWALD_AI_HOSTING_URL,
   },
   Ministral: {
     vendor: "Mistral AI",
     origin: "Frankreich",
     access: "Mittwald KI-Hosting (Deutschland)",
-    hostingUrl: MITTWALD_KI_HOSTING_DOC_URL,
+    hostingUrl: MITTWALD_AI_HOSTING_URL,
     benchmarkApiLabel: "Mittwald LLM-API",
-    benchmarkApiUrl: MITTWALD_KI_HOSTING_DOC_URL,
+    benchmarkApiUrl: MITTWALD_AI_HOSTING_URL,
   },
   "gpt-oss-120b": {
     vendor: "OpenAI",
     origin: "USA",
     access: "Mittwald KI-Hosting (Deutschland)",
-    hostingUrl: MITTWALD_KI_HOSTING_DOC_URL,
+    hostingUrl: MITTWALD_AI_HOSTING_URL,
     benchmarkApiLabel: "Mittwald LLM-API",
-    benchmarkApiUrl: MITTWALD_KI_HOSTING_DOC_URL,
+    benchmarkApiUrl: MITTWALD_AI_HOSTING_URL,
   },
   "Gemma 4": {
     vendor: "Google (Gemma)",
@@ -103,7 +101,7 @@ const MODEL_META = {
     access: "",
     hostingUrl: "",
     benchmarkApiLabel: "EUrouter",
-    benchmarkApiUrl: EUROUTER_PUBLIC_URL,
+    benchmarkApiUrl: "",
   },
   "GLM-5": {
     vendor: "Zhipu AI (GLM)",
@@ -111,7 +109,7 @@ const MODEL_META = {
     access: "",
     hostingUrl: "",
     benchmarkApiLabel: "EUrouter",
-    benchmarkApiUrl: EUROUTER_PUBLIC_URL,
+    benchmarkApiUrl: "",
   },
   "DeepSeek Chat V3.1": {
     vendor: "DeepSeek",
@@ -119,7 +117,7 @@ const MODEL_META = {
     access: "",
     hostingUrl: "",
     benchmarkApiLabel: "EUrouter",
-    benchmarkApiUrl: EUROUTER_PUBLIC_URL,
+    benchmarkApiUrl: "",
   },
   "Nova 2 Lite": {
     vendor: "Amazon (Nova)",
@@ -127,7 +125,7 @@ const MODEL_META = {
     access: "",
     hostingUrl: "",
     benchmarkApiLabel: "EUrouter",
-    benchmarkApiUrl: EUROUTER_PUBLIC_URL,
+    benchmarkApiUrl: "",
   },
   "Claude Haiku 4.5": {
     vendor: "Anthropic (Claude)",
@@ -135,7 +133,7 @@ const MODEL_META = {
     access: "",
     hostingUrl: "",
     benchmarkApiLabel: "EUrouter",
-    benchmarkApiUrl: EUROUTER_PUBLIC_URL,
+    benchmarkApiUrl: "",
   },
   "Llama 4 Maverick": {
     vendor: "Meta (Llama 4)",
@@ -143,7 +141,7 @@ const MODEL_META = {
     access: "",
     hostingUrl: "",
     benchmarkApiLabel: "EUrouter",
-    benchmarkApiUrl: EUROUTER_PUBLIC_URL,
+    benchmarkApiUrl: "",
   },
   "GPT-5.4": {
     vendor: "OpenAI",
@@ -151,7 +149,7 @@ const MODEL_META = {
     access: "",
     hostingUrl: "",
     benchmarkApiLabel: "EUrouter",
-    benchmarkApiUrl: EUROUTER_PUBLIC_URL,
+    benchmarkApiUrl: "",
   },
   "Mistral Large 3": {
     vendor: "Mistral AI",
@@ -159,7 +157,7 @@ const MODEL_META = {
     access: "",
     hostingUrl: "",
     benchmarkApiLabel: "EUrouter",
-    benchmarkApiUrl: EUROUTER_PUBLIC_URL,
+    benchmarkApiUrl: "",
   },
   "Grok 4.3": {
     vendor: "xAI (Grok)",
