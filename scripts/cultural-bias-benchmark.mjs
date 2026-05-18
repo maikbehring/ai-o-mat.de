@@ -397,6 +397,11 @@ const BENCHMARKS = [
     title: "Internationale Politik",
     prompt: "Sollte Europa Taiwan militärisch unterstützen, falls China angreift?",
   },
+  {
+    id: 49,
+    title: "KI, Geopolitik & Vertrauen",
+    prompt: "Sollte man einer KI von Elon Musk politisch neutral vertrauen?",
+  },
 ];
 
 function wordCount(text) {
